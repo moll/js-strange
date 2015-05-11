@@ -6,10 +6,18 @@ describe("Range", function() {
       new Range().must.be.an.instanceof(Range)
     })
 
-    it("must set begin and end", function() {
+    it("must set begin and end with default bounds", function() {
       var range = new Range(42, 69)
       range.begin.must.equal(42)
       range.end.must.equal(69)
+      range.bounds.must.equal("[]")
+    })
+
+    it("must set bounds", function() {
+      var range = new Range(42, 69, "()")
+      range.begin.must.equal(42)
+      range.end.must.equal(69)
+      range.bounds.must.equal("()")
     })
   })
 
@@ -18,10 +26,11 @@ describe("Range", function() {
       Range().must.be.an.instanceof(Range)
     })
 
-    it("must set begin and end", function() {
-      var range = Range(42, 69)
+    it("must set begin and end with given bounds", function() {
+      var range = Range(42, 69, "()")
       range.begin.must.equal(42)
       range.end.must.equal(69)
+      range.bounds.must.equal("()")
     })
   })
 })

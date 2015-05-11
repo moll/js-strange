@@ -41,6 +41,23 @@ var Range = require("strange")
 if (range instanceof Range) console.log(range.begin, range.end)
 ```
 
+### Bounds
+You can set a range's bounds by passing the bounds as a two-character string of
+parentheses as the 3rd argument:
+```javascript
+new Range(1, 3, "[)")
+```
+
+Bounds signify whether the range includes or excludes that particular endpoint.
+The range above therefore includes numbers `>= 1 < 3`.
+
+Pair | Meaning
+-----|--------
+`()` | open
+`[]` | closed
+`[)` | left-closed, right-open
+`(]` | left-open, right-closed
+
 
 License
 -------
