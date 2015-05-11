@@ -23,6 +23,8 @@ npm install strange
 stRange.js doesn't yet have a build ready for the browser, but you might be able
 to use [Browserify][browserify] to have it run there till then.
 
+[browserify]: https://github.com/substack/node-browserify
+
 
 Using
 -----
