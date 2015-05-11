@@ -12,6 +12,8 @@ Range.prototype.toString = function() {
   return bounds[0] + stringify(this.begin) +","+ stringify(this.end) + bounds[1]
 }
 
+Range.prototype.toJSON = Range.prototype.toString
+
 Range.parse = function(range, parse) {
   var endpoints = range.slice(1, -1).split(",", 2)
   var begin = endpoints[0] ? parse ? parse(endpoints[0]) : endpoints[0] : null
