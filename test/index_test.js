@@ -73,6 +73,12 @@ describe("Range", function() {
     })
   })
 
+  describe(".prototype.inspect", function() {
+    it("must be an alias to toString", function() {
+      Range.prototype.inspect.must.equal(Range.prototype.toString)
+    })
+  })
+
   describe(".parse", function() {
     it("must parse string with bounds", function() {
       Range.parse("[a,z]").must.eql(new Range("a", "z", "[]"))

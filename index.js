@@ -13,6 +13,7 @@ Range.prototype.toString = function() {
 }
 
 Range.prototype.toJSON = Range.prototype.toString
+Range.prototype.inspect = Range.prototype.toString
 
 Range.parse = function(range, parse) {
   var endpoints = range.slice(1, -1).split(",", 2)
