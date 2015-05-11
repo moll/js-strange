@@ -12,8 +12,8 @@ ranges**.
 
 Installing
 ----------
-**Note**: stRange.js will follow the [semantic versioning](http://semver.org/)
-starting from v1.0.0.
+stRange.js follows [semantic versioning](http://semver.org/), so feel free to
+depend on its major version with something like `>= 1.0.0 < 2` (a.k.a `^1.0.0`).
 
 ### Installing on Node.js
 ```
