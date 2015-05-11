@@ -1,12 +1,13 @@
 stRange.js
 ==========
 [![NPM version][npm-badge]](http://badge.fury.io/js/strange)
-[npm-badge]: https://badge.fury.io/js/strange.png
 
 stRange.js is a **range object** for JavaScript. It doesn't currently do
 anything beyond allowing you to construct it with a beginning and an end, but it
 will eventually support both **exclusive and inclusive ranges** and **infinite
 ranges**.
+
+[npm-badge]: https://badge.fury.io/js/strange.png
 
 
 Installing
