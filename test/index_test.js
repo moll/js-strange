@@ -33,4 +33,37 @@ describe("Range", function() {
       range.bounds.must.equal("()")
     })
   })
+
+  describe(".prototype.toString", function() {
+    it("must stringify range with given bounds", function() {
+      new Range(42, 69, "()").toString().must.equal("(42,69)")
+      new Range(42, 69, "[]").toString().must.equal("[42,69]")
+      new Range(42, 69, "[)").toString().must.equal("[42,69)")
+      new Range(42, 69, "(]").toString().must.equal("(42,69]")
+    })
+
+    it("must stringify begin", function() {
+      // Having valueOf too ensures the value is stringied before string
+      // concatenation.
+      function Value(value) { this.value = value }
+      Value.prototype.valueOf = function() { return null }
+      Value.prototype.toString = function() { return this.value }
+
+      var a = new Value(42)
+      var b = new Value(69)
+      new Range(a, b).toString().must.equal("[42,69]")
+    })
+
+    it("must stringify null endpoint as empty", function() {
+      new Range(42, null).toString().must.equal("[42,]")
+      new Range(null, 42).toString().must.equal("[,42]")
+      new Range(null, null).toString().must.equal("[,]")
+    })
+
+    it("must stringify Infinity as empty", function() {
+      new Range(42, Infinity).toString().must.equal("[42,]")
+      new Range(-Infinity, 42).toString().must.equal("[,42]")
+      new Range(-Infinity, Infinity).toString().must.equal("[,]")
+    })
+  })
 })
