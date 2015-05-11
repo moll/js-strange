@@ -2,10 +2,10 @@ stRange.js
 ==========
 [![NPM version][npm-badge]](http://badge.fury.io/js/strange)
 
-stRange.js is a **range object** for JavaScript. It doesn't currently do
-anything beyond allowing you to construct it with a beginning and an end, but it
-will eventually support both **exclusive and inclusive ranges** and **infinite
-ranges**.
+stRange.js is a **range object** for JavaScript. Use it to have a single value
+type with two endpoints and their boundaries. Stringifies itself in the style of
+`[begin,end)` and allows you to parse a string back. Also useful with
+PostgreSQL.
 
 [npm-badge]: https://badge.fury.io/js/strange.png
 
