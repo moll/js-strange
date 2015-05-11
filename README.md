@@ -59,6 +59,25 @@ Pair | Meaning
 `(]` | left-open, right-closed
 
 
+### Parsing
+To parse a range stringified by `Range.prototype.toString`, pass it to
+`Range.parse`:
+
+```javascript
+Range.parse("[a, z)") // => new Range("a", "z", "[)")
+```
+
+To have Strange.js also parse the endpoints, pass a function to `Range.parse`:
+```javascript
+Range.parse("[42, 69]", Number) // => new Range(42, 69)
+```
+
+### Using with PostgreSQL
+The string format used by Strange.js matches [PostgreSQL's range type
+format](http://www.postgresql.org/docs/9.4/static/rangetypes.html). You can
+therefore use Strange.js to parse and stringify ranges for your database.
+
+
 License
 -------
 stRange.js is released under a *Lesser GNU Affero General Public License*, which in summary means:

@@ -12,6 +12,13 @@ Range.prototype.toString = function() {
   return bounds[0] + stringify(this.begin) +","+ stringify(this.end) + bounds[1]
 }
 
+Range.parse = function(range, parse) {
+  var endpoints = range.slice(1, -1).split(",", 2)
+  var begin = endpoints[0] ? parse ? parse(endpoints[0]) : endpoints[0] : null
+  var end = endpoints[1] ? parse ? parse(endpoints[1]) : endpoints[1] : null
+  return new Range(begin, end, range[0] + range[range.length - 1])
+}
+
 function stringify(value) {
   return value == null || isInfinity(value) ? "" : String(value)
 }
