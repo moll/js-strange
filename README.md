@@ -64,12 +64,12 @@ To parse a range stringified by `Range.prototype.toString`, pass it to
 `Range.parse`:
 
 ```javascript
-Range.parse("[a, z)") // => new Range("a", "z", "[)")
+Range.parse("[a,z)") // => new Range("a", "z", "[)")
 ```
 
 To have Strange.js also parse the endpoints, pass a function to `Range.parse`:
 ```javascript
-Range.parse("[42, 69]", Number) // => new Range(42, 69)
+Range.parse("[42,69]", Number) // => new Range(42, 69)
 ```
 
 ### Using with PostgreSQL
