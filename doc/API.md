@@ -57,7 +57,8 @@ Range's end, or right endpoint.
 
 <a name="Range.prototype.intersects" />
 ### Range.prototype.intersects(other)
-Check if this range intersects with another.
+Check if this range intersects with another.  
+Returns `true` or `false`.
 
 Ranges that have common points intersect. Ranges that are consecutive and
 with *inclusive* endpoints are also intersecting. An empty range will never

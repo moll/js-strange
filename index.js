@@ -81,6 +81,8 @@ Range.prototype.isEmpty = function() {
 
 /**
  * Check if this range intersects with another.
+ * Check if this range intersects with another.  
+ * Returns `true` or `false`.
  *
  * Ranges that have common points intersect. Ranges that are consecutive and
  * with *inclusive* endpoints are also intersecting. An empty range will never
