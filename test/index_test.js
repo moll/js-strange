@@ -34,6 +34,23 @@ describe("Range", function() {
     })
   })
 
+  describe(".prototype.isEmpty", function() {
+    it("must return true if exclusive with equivalent endpoints", function() {
+      new Range(1, 1, "()").isEmpty().must.be.true()
+      new Range(1, 1, "[)").isEmpty().must.be.true()
+      new Range(1, 1, "(]").isEmpty().must.be.true()
+    })
+
+    it("must return false if inclusive with equivalent endpoints", function() {
+      new Range(1, 1, "[]").isEmpty().must.be.false()
+    })
+
+    it("must return false if exclusive with non-equivalent endpoints",
+      function() {
+      new Range(1, 2, "()").isEmpty().must.be.false()
+    })
+  })
+
   describe(".prototype.toString", function() {
     it("must stringify range with given bounds", function() {
       new Range(42, 69, "()").toString().must.equal("(42,69)")

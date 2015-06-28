@@ -1,3 +1,6 @@
+## Unreleased
+- Adds `Range.prototype.isEmpty`.
+
 ## 1.0.0 (May 11, 2015)
 - Adds support for setting range bounds with `new Range(1, 3, "[)")` to set
   a left-closed, right-open range.

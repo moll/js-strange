@@ -7,6 +7,10 @@ function Range(begin, end, bounds) {
   this.bounds = bounds === undefined ? "[]" : bounds
 }
 
+Range.prototype.isEmpty = function() {
+  return equal(this.begin, this.end) && this.bounds != "[]"
+}
+
 Range.prototype.toString = function() {
   var bounds = this.bounds
   return bounds[0] + stringify(this.begin) +","+ stringify(this.end) + bounds[1]
@@ -27,3 +31,5 @@ function stringify(value) {
 }
 
 function isInfinity(value) { return value === Infinity || value === -Infinity }
+// Use < and > for coercion into valueOf.
+function equal(a, b) { return !(a < b || a > b) }
