@@ -12,8 +12,9 @@ Range.prototype.isEmpty = function() {
 }
 
 Range.prototype.toString = function() {
-  var bounds = this.bounds
-  return bounds[0] + stringify(this.begin) +","+ stringify(this.end) + bounds[1]
+  var a = stringify(this.begin)
+  var b = stringify(this.end)
+  return this.bounds[0] + a + "," + b + this.bounds[1]
 }
 
 Range.prototype.toJSON = Range.prototype.toString
@@ -26,10 +27,11 @@ Range.parse = function(range, parse) {
   return new Range(begin, end, range[0] + range[range.length - 1])
 }
 
-function stringify(value) {
-  return value == null || isInfinity(value) ? "" : String(value)
+function stringify(value) { return isInfinite(value) ? "" : String(value) }
+
+function isInfinite(value) {
+  return value === null || value === Infinity || value === -Infinity
 }
 
-function isInfinity(value) { return value === Infinity || value === -Infinity }
 // Use < and > for coercion into valueOf.
 function equal(a, b) { return !(a < b || a > b) }
