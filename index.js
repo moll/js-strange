@@ -8,6 +8,7 @@ function Range(begin, end, bounds) {
 }
 
 Range.prototype.isEmpty = function() {
+  if (this.begin === undefined || this.end === undefined) return true
   return equal(this.begin, this.end) && this.bounds != "[]"
 }
 

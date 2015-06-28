@@ -19,6 +19,13 @@ describe("Range", function() {
       range.end.must.equal(69)
       range.bounds.must.equal("()")
     })
+
+    it("must set bounds to undefined if not given", function() {
+      var range = new Range
+      range.must.have.property("begin", undefined)
+      range.must.have.property("end", undefined)
+      range.bounds.must.equal("[]")
+    })
   })
 
   describe("when called as a function", function() {
@@ -35,6 +42,20 @@ describe("Range", function() {
   })
 
   describe(".prototype.isEmpty", function() {
+    it("must return true given a range with undefined endpoints", function() {
+      new Range(undefined, undefined).isEmpty().must.be.true()
+    })
+
+    it("must return true given a range with an undefined endpoints",
+      function() {
+      new Range(null, undefined).isEmpty().must.be.true()
+      new Range(undefined, null).isEmpty().must.be.true()
+    })
+
+    it("must return false given a range with unbounded endpoints", function() {
+      new Range(null, null).isEmpty().must.be.false()
+    })
+
     it("must return true if exclusive with equivalent endpoints", function() {
       new Range(1, 1, "()").isEmpty().must.be.true()
       new Range(1, 1, "[)").isEmpty().must.be.true()
@@ -64,9 +85,15 @@ describe("Range", function() {
       isIntersecting(a, b).must.be.true()
     })
 
-    it("must return false when intersecting, but one empty", function() {
+    it("must return false when intersecting, but one of zero size", function() {
       var a = new Range(0, 10)
       var b = new Range(5, 5, "[)")
+      isIntersecting(a, b).must.be.false()
+    })
+
+    it("must return false when intersecting, but one empty", function() {
+      var a = new Range(0, 10)
+      var b = new Range
       isIntersecting(a, b).must.be.false()
     })
 
