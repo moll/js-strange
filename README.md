@@ -89,6 +89,7 @@ For extended documentation on all functions, please see the
 - [begin](https://github.com/moll/js-strange/blob/master/doc/API.md#range.begin)
 - [bounds](https://github.com/moll/js-strange/blob/master/doc/API.md#range.bounds)
 - [end](https://github.com/moll/js-strange/blob/master/doc/API.md#range.end)
+- [contains](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.contains)(value)
 - [intersects](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.intersects)(other)
 - [isEmpty](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isEmpty)()
 - [parse](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.parse)(range, [parseEndpoint])

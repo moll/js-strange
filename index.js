@@ -80,7 +80,28 @@ Range.prototype.isEmpty = function() {
 }
 
 /**
- * Check if this range intersects with another.
+ * Check if a given value is contained within this range.  
+ * Returns `true` or `false`.
+ *
+ * @example
+ * new Range(0, 10).contains(5) // => true
+ * new Range(0, 10).contains(10) // => true
+ * new Range(0, 10, "[)").contains(10) // => false
+ *
+ * @method contains
+ * @param value
+ */
+Range.prototype.contains = function(value) {
+  var a = this.begin
+  var b = this.end
+
+  return (
+    (b === null || (this.bounds[1] === "]" ? value <= b : value < b)) &&
+    (a === null || (this.bounds[0] === "[" ? a <= value : a < value))
+  )
+}
+
+/**
  * Check if this range intersects with another.  
  * Returns `true` or `false`.
  *
@@ -169,6 +190,6 @@ function isInfinite(value) {
 function equal(a, b) { return !(a < b || b < a) }
 
 function isBeginBeforeEnd(a, b) {
-  if (a.bounds[0] == "[" && b.bounds[1] == "]") return a.begin <= b.end
+  if (a.bounds[0] === "[" && b.bounds[1] === "]") return a.begin <= b.end
   else return a.begin < b.end
 }

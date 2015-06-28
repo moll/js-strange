@@ -4,6 +4,7 @@ Strange.js API Documentation
 - [begin](#range.begin)
 - [bounds](#range.bounds)
 - [end](#range.end)
+- [contains](#Range.prototype.contains)(value)
 - [intersects](#Range.prototype.intersects)(other)
 - [isEmpty](#Range.prototype.isEmpty)()
 - [parse](#Range.parse)(range, [parseEndpoint])
@@ -54,6 +55,18 @@ new Range(1, 5, "[)").bounds // => "[)"
 <a name="range.end" />
 ### range.end
 Range's end, or right endpoint.
+
+<a name="Range.prototype.contains" />
+### Range.prototype.contains(value)
+Check if a given value is contained within this range.  
+Returns `true` or `false`.
+
+**Examples**:
+```javascript
+new Range(0, 10).contains(5) // => true
+new Range(0, 10).contains(10) // => true
+new Range(0, 10, "[)").contains(10) // => false
+```
 
 <a name="Range.prototype.intersects" />
 ### Range.prototype.intersects(other)

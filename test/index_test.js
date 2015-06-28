@@ -46,8 +46,7 @@ describe("Range", function() {
       new Range(undefined, undefined).isEmpty().must.be.true()
     })
 
-    it("must return true given a range with an undefined endpoints",
-      function() {
+    it("must return true given a range with undefined endpoints", function() {
       new Range(null, undefined).isEmpty().must.be.true()
       new Range(undefined, null).isEmpty().must.be.true()
     })
@@ -69,6 +68,57 @@ describe("Range", function() {
     it("must return false if exclusive with non-equivalent endpoints",
       function() {
       new Range(1, 2, "()").isEmpty().must.be.false()
+    })
+  })
+
+  describe(".prototype.contains", function() {
+    it("must return true when contained", function() {
+      new Range(10, 20).contains(15).must.be.true()
+    })
+
+    it("must return false when intersecting, but of zero size", function() {
+      new Range(5, 5, "[)").contains(5).must.be.false()
+    })
+
+    it("must return true when on inclusive boundary", function() {
+      new Range(0, 10, "(]").contains(10).must.be.true()
+      new Range(0, 10, "[)").contains(0).must.be.true()
+    })
+
+    it("must return false when on exclusive boundary", function() {
+      new Range(0, 10, "[)").contains(10).must.be.false()
+      new Range(0, 10, "(]").contains(0).must.be.false()
+    })
+
+    it("must return false when empty", function() {
+      new Range().contains(5).must.be.false()
+    })
+
+    it("must return true if one endpoint Infinity", function() {
+      new Range(0, Infinity).contains(10).must.be.true()
+      new Range(-Infinity, 0).contains(-10).must.be.true()
+    })
+
+    it("must return true if one endpoint null", function() {
+      new Range(0, null).contains(10).must.be.true()
+      new Range(null, 0).contains(-10).must.be.true()
+    })
+
+    it("must return true if one endpoint null and on inclusive boundary",
+      function() {
+      new Range(0, null).contains(0).must.be.true()
+      new Range(null, 0).contains(0).must.be.true()
+    })
+
+    it("must return false if one endpoint null and on exclusive boundary",
+      function() {
+      new Range(0, null, "(]").contains(0).must.be.false()
+      new Range(null, 0, "[)").contains(0).must.be.false()
+    })
+
+    it("must return false if one endpoint undefined", function() {
+      new Range(0, undefined).contains(0).must.be.false()
+      new Range(undefined, 0).contains(0).must.be.false()
     })
   })
 
