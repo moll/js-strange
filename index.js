@@ -11,6 +11,12 @@ Range.prototype.isEmpty = function() {
   return equal(this.begin, this.end) && this.bounds != "[]"
 }
 
+Range.prototype.isIntersecting = function(other) {
+  if (this.isEmpty()) return false
+  if (other.isEmpty()) return false
+  return isBeginBeforeEnd(this, other) && isBeginBeforeEnd(other, this)
+}
+
 Range.prototype.toString = function() {
   var a = stringify(this.begin)
   var b = stringify(this.end)
@@ -35,3 +41,8 @@ function isInfinite(value) {
 
 // Use < and > for coercion into valueOf.
 function equal(a, b) { return !(a < b || a > b) }
+
+function isBeginBeforeEnd(a, b) {
+  if (a.bounds[0] == "[" && b.bounds[1] == "]") return a.begin <= b.end
+  else return a.begin < b.end
+}
