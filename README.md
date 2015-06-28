@@ -78,6 +78,24 @@ format](http://www.postgresql.org/docs/9.4/static/rangetypes.html). You can
 therefore use Strange.js to parse and stringify ranges for your database.
 
 
+API
+---
+For extended documentation on all functions, please see the
+[Strange.js API Documentation][api].
+
+[api]: https://github.com/moll/js-strange/blob/master/doc/API.md
+
+### [Range](https://github.com/moll/js-strange/blob/master/doc/API.md#Range)
+- [begin](https://github.com/moll/js-strange/blob/master/doc/API.md#range.begin)
+- [bounds](https://github.com/moll/js-strange/blob/master/doc/API.md#range.bounds)
+- [end](https://github.com/moll/js-strange/blob/master/doc/API.md#range.end)
+- [isEmpty](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isEmpty)()
+- [isIntersecting](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isIntersecting)(other)
+- [parse](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.parse)(range, [parseEndpoint])
+- [toJSON](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.toJSON)()
+- [toString](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.toString)()
+
+
 License
 -------
 stRange.js is released under a *Lesser GNU Affero General Public License*, which in summary means:
