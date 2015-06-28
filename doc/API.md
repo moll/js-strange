@@ -4,8 +4,8 @@ Strange.js API Documentation
 - [begin](#range.begin)
 - [bounds](#range.bounds)
 - [end](#range.end)
+- [intersects](#Range.prototype.intersects)(other)
 - [isEmpty](#Range.prototype.isEmpty)()
-- [isIntersecting](#Range.prototype.isIntersecting)(other)
 - [parse](#Range.parse)(range, [parseEndpoint])
 - [toJSON](#Range.prototype.toJSON)()
 - [toString](#Range.prototype.toString)()
@@ -55,6 +55,22 @@ new Range(1, 5, "[)").bounds // => "[)"
 ### range.end
 Range's end, or right endpoint.
 
+<a name="Range.prototype.intersects" />
+### Range.prototype.intersects(other)
+Check if this range intersects with another.
+
+Ranges that have common points intersect. Ranges that are consecutive and
+with *inclusive* endpoints are also intersecting. An empty range will never
+intersect.
+
+**Examples**:
+```javascript
+new Range(0, 10).intersects(new Range(5, 7)) // => true
+new Range(0, 10).intersects(new Range(10, 20)) // => true
+new Range(0, 10, "[)").intersects(new Range(10, 20)) // => false
+new Range(0, 10).intersects(new Range(20, 30)) // => false
+```
+
 <a name="Range.prototype.isEmpty" />
 ### Range.prototype.isEmpty()
 Check whether the range is empty.  
@@ -71,22 +87,6 @@ the object's `valueOf` function.
 new Range().isEmpty() // => true
 new Range(5, 5, "[)").isEmpty() // => true
 new Range(1, 10).isEmpty() // => false
-```
-
-<a name="Range.prototype.isIntersecting" />
-### Range.prototype.isIntersecting(other)
-Check if this range intersects with another.
-
-Ranges that have common points intersect. Ranges that are consecutive and
-with *inclusive* endpoints are also intersecting. An empty range will never
-intersect.
-
-**Examples**:
-```javascript
-new Range(0, 10).isIntersecting(new Range(5, 7)) // => true
-new Range(0, 10).isIntersecting(new Range(10, 20)) // => true
-new Range(0, 10, "[)").isIntersecting(new Range(10, 20)) // => false
-new Range(0, 10).isIntersecting(new Range(20, 30)) // => false
 ```
 
 <a name="Range.parse" />

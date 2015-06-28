@@ -72,111 +72,111 @@ describe("Range", function() {
     })
   })
 
-  describe(".prototype.isIntersecting", function() {
-    function isIntersecting(a, b) {
-      var result = a.isIntersecting(b)
-      b.isIntersecting(a).must.equal(result)
+  describe(".prototype.intersects", function() {
+    function intersects(a, b) {
+      var result = a.intersects(b)
+      b.intersects(a).must.equal(result)
       return result
     }
 
     it("must return true when intersecting", function() {
       var a = new Range(10, 20)
       var b = new Range(5, 15)
-      isIntersecting(a, b).must.be.true()
+      intersects(a, b).must.be.true()
     })
 
     it("must return false when intersecting, but one of zero size", function() {
       var a = new Range(0, 10)
       var b = new Range(5, 5, "[)")
-      isIntersecting(a, b).must.be.false()
+      intersects(a, b).must.be.false()
     })
 
     it("must return false when intersecting, but one empty", function() {
       var a = new Range(0, 10)
       var b = new Range
-      isIntersecting(a, b).must.be.false()
+      intersects(a, b).must.be.false()
     })
 
     it("must return false when not intersecting", function() {
       var a = new Range(0, 10)
       var b = new Range(30, 40)
-      isIntersecting(a, b).must.be.false()
+      intersects(a, b).must.be.false()
     })
 
     it("must return true when intersecting and one Infinity", function() {
       var a = new Range(0, 10)
       var b = new Range(5, Infinity)
-      isIntersecting(a, b).must.be.true()
+      intersects(a, b).must.be.true()
     })
 
     it("must return true when intersecting and one null", function() {
       var a = new Range(0, 10)
       var b = new Range(5, null)
-      isIntersecting(a, b).must.be.true()
+      intersects(a, b).must.be.true()
     })
 
     it("must return true when one encloses the other", function() {
       var a = new Range(0, 10)
       var b = new Range(3, 6)
-      isIntersecting(a, b).must.be.true()
+      intersects(a, b).must.be.true()
     })
 
     it("must return true when one encloses the other, but one exclusive",
       function() {
       var a = new Range(0, 10)
       var b = new Range(3, 6, "()")
-      isIntersecting(a, b).must.be.true()
+      intersects(a, b).must.be.true()
     })
 
     it("must return true when one encloses the other, but both exclusive",
       function() {
       var a = new Range(0, 10, "()")
       var b = new Range(3, 6, "()")
-      isIntersecting(a, b).must.be.true()
+      intersects(a, b).must.be.true()
     })
 
     it("must return true when one encloses the other and is Infinity",
       function() {
       var a = new Range(0, 10)
       var b = new Range(-Infinity, Infinity)
-      isIntersecting(a, b).must.be.true()
+      intersects(a, b).must.be.true()
     })
 
     it("must return true when one encloses the other and is null", function() {
       var a = new Range(0, 10)
       var b = new Range(null, null)
-      isIntersecting(a, b).must.be.true()
+      intersects(a, b).must.be.true()
     })
 
     it("must return true when consecutive", function() {
       var a = new Range(0, 10)
       var b = new Range(10, 20)
-      isIntersecting(a, b).must.be.true()
+      intersects(a, b).must.be.true()
     })
 
     it("must return true when one at the boundary of other", function() {
       var a = new Range(0, 10)
       var b = new Range(10, 10)
-      isIntersecting(a, b).must.be.true()
+      intersects(a, b).must.be.true()
     })
 
     it("must return false when consecutive, but end exclusive", function() {
       var a = new Range(0, 10, "[)")
       var b = new Range(10, 20)
-      isIntersecting(a, b).must.be.false()
+      intersects(a, b).must.be.false()
     })
 
     it("must return false when consecutive, but begin exclusive", function() {
       var a = new Range(0, 10)
       var b = new Range(10, 20, "(]")
-      isIntersecting(a, b).must.be.false()
+      intersects(a, b).must.be.false()
     })
 
     it("must return false when consecutive, but both exclusive",
       function() {
       var a = new Range(0, 10, "[)")
       var b = new Range(10, 20, "(]")
-      isIntersecting(a, b).must.be.false()
+      intersects(a, b).must.be.false()
     })
   })
 

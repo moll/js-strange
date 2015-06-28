@@ -87,15 +87,15 @@ Range.prototype.isEmpty = function() {
  * intersect.
  *
  * @example
- * new Range(0, 10).isIntersecting(new Range(5, 7)) // => true
- * new Range(0, 10).isIntersecting(new Range(10, 20)) // => true
- * new Range(0, 10, "[)").isIntersecting(new Range(10, 20)) // => false
- * new Range(0, 10).isIntersecting(new Range(20, 30)) // => false
+ * new Range(0, 10).intersects(new Range(5, 7)) // => true
+ * new Range(0, 10).intersects(new Range(10, 20)) // => true
+ * new Range(0, 10, "[)").intersects(new Range(10, 20)) // => false
+ * new Range(0, 10).intersects(new Range(20, 30)) // => false
  *
- * @method isIntersecting
+ * @method intersects
  * @param other
  */
-Range.prototype.isIntersecting = function(other) {
+Range.prototype.intersects = function(other) {
   if (this.isEmpty()) return false
   if (other.isEmpty()) return false
   return isBeginBeforeEnd(this, other) && isBeginBeforeEnd(other, this)
