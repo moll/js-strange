@@ -1,6 +1,6 @@
 {
 	"name": "strange",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Range object. Supports exclusive and infinite ranges.",
 	"keywords": [
 		"range",

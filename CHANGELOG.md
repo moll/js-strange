@@ -1,4 +1,4 @@
-## Unreleased
+## 1.1.0 (Jun 29, 2015)
 - Adds `Range.prototype.isEmpty`.
 - Adds `Range.prototype.intersects`.
 - Adds `Range.prototype.contains`.
