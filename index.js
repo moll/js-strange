@@ -76,7 +76,7 @@ function Range(begin, end, bounds) {
  */
 Range.prototype.isEmpty = function() {
   if (this.begin === undefined || this.end === undefined) return true
-  return this.bounds != "[]" && equal(this.begin, this.end)
+  return this.bounds != "[]" && isEqual(this.begin, this.end)
 }
 
 /**
@@ -187,7 +187,7 @@ function isInfinite(value) {
 }
 
 // Use < and > for coercion into valueOf.
-function equal(a, b) { return !(a < b || b < a) }
+function isEqual(a, b) { return !(a < b || b < a) }
 
 function isBeginBeforeEnd(a, b) {
   if (a.bounds[0] === "[" && b.bounds[1] === "]") return a.begin <= b.end
