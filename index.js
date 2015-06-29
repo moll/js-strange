@@ -129,7 +129,7 @@ Range.prototype.intersects = function(other) {
  *
  * This happens to match the string format used by [PostgreSQL's range type
  * format](http://www.postgresql.org/docs/9.4/static/rangetypes.html). You can
- * therefore use Strange.js to parse and stringify ranges for your database.
+ * therefore use stRange.js to parse and stringify ranges for your database.
  *
  * @example
  * new Range(1, 5).toString() // => "[1,5]"

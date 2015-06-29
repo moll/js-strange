@@ -67,21 +67,21 @@ To parse a range stringified by `Range.prototype.toString`, pass it to
 Range.parse("[a,z)") // => new Range("a", "z", "[)")
 ```
 
-To have Strange.js also parse the endpoints, pass a function to `Range.parse`:
+To have stRange.js also parse the endpoints, pass a function to `Range.parse`:
 ```javascript
 Range.parse("[42,69]", Number) // => new Range(42, 69)
 ```
 
 ### Using with PostgreSQL
-The string format used by Strange.js matches [PostgreSQL's range type
+The string format used by stRange.js matches [PostgreSQL's range type
 format](http://www.postgresql.org/docs/9.4/static/rangetypes.html). You can
-therefore use Strange.js to parse and stringify ranges for your database.
+therefore use stRange.js to parse and stringify ranges for your database.
 
 
 API
 ---
 For extended documentation on all functions, please see the
-[Strange.js API Documentation][api].
+[stRange.js API Documentation][api].
 
 [api]: https://github.com/moll/js-strange/blob/master/doc/API.md
 

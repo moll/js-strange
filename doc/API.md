@@ -1,4 +1,4 @@
-Strange.js API Documentation
+stRange.js API Documentation
 ============================
 ### [Range](#Range)
 - [begin](#range.begin)
@@ -134,7 +134,7 @@ Stringifies a range in `[a,b]` format.
 
 This happens to match the string format used by [PostgreSQL's range type
 format](http://www.postgresql.org/docs/9.4/static/rangetypes.html). You can
-therefore use Strange.js to parse and stringify ranges for your database.
+therefore use stRange.js to parse and stringify ranges for your database.
 
 **Examples**:
 ```javascript

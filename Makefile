@@ -3,7 +3,7 @@ TEST_OPTS =
 
 # NOTE: Sorry, mocumentation is not yet published.
 MOCUMENT = ~/Documents/Mocumentation/bin/mocument
-MOCUMENT_OPTS = --type yui --title Strange.js
+MOCUMENT_OPTS = --type yui --title stRange.js
 GITHUB_URL = https://github.com/moll/js-strange
 
 love:
