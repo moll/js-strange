@@ -1,4 +1,4 @@
-## Unreleased
+## 1.2.0 (Jul 4, 2015)
 - Adds [`Range.prototype.isBounded`][].
 - Adds [`Range.prototype.isUnbounded`][].
 - Adds [`Range.prototype.isFinite`][].
