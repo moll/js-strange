@@ -80,6 +80,25 @@ Range.prototype.isEmpty = function() {
 }
 
 /**
+ * Check whether the range is unbounded.  
+ * An unbounded range is one where either endpoint is `null` or `Infinity`. An
+ * empty range is not considered unbounded.
+ *
+ * @example
+ * new Range().isUnbounded() // => false
+ * new Range(5, 5).isUnbounded() // => false
+ * new Range(null, new Date(2000, 5, 18).isUnbounded() // => true
+ * new Range(0, Infinity).isUnbounded() // => true
+ * new Range(-Infinity, Infinity).isUnbounded() // => true
+ *
+ * @method isUnbounded
+ */
+Range.prototype.isUnbounded = function() {
+  if (this.begin === undefined || this.end === undefined) return false
+  return isInfinity(this.begin) || isInfinity(this.end)
+}
+
+/**
  * Check if a given value is contained within this range.  
  * Returns `true` or `false`.
  *
@@ -180,9 +199,9 @@ Range.parse = function(range, parse) {
   return new Range(begin, end, range[0] + range[range.length - 1])
 }
 
-function stringify(value) { return isInfinite(value) ? "" : String(value) }
+function stringify(value) { return isInfinity(value) ? "" : String(value) }
 
-function isInfinite(value) {
+function isInfinity(value) {
   return value === null || value === Infinity || value === -Infinity
 }
 

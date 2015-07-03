@@ -92,6 +92,7 @@ For extended documentation on all functions, please see the
 - [contains](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.contains)(value)
 - [intersects](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.intersects)(other)
 - [isEmpty](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isEmpty)()
+- [isUnbounded](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isUnbounded)()
 - [parse](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.parse)(range, [parseEndpoint])
 - [toJSON](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.toJSON)()
 - [toString](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.toString)()

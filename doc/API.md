@@ -7,6 +7,7 @@ stRange.js API Documentation
 - [contains](#Range.prototype.contains)(value)
 - [intersects](#Range.prototype.intersects)(other)
 - [isEmpty](#Range.prototype.isEmpty)()
+- [isUnbounded](#Range.prototype.isUnbounded)()
 - [parse](#Range.parse)(range, [parseEndpoint])
 - [toJSON](#Range.prototype.toJSON)()
 - [toString](#Range.prototype.toString)()
@@ -101,6 +102,21 @@ the object's `valueOf` function.
 new Range().isEmpty() // => true
 new Range(5, 5, "[)").isEmpty() // => true
 new Range(1, 10).isEmpty() // => false
+```
+
+<a name="Range.prototype.isUnbounded" />
+### Range.prototype.isUnbounded()
+Check whether the range is unbounded.  
+An unbounded range is one where either endpoint is `null` or `Infinity`. An
+empty range is not considered unbounded.
+
+**Examples**:
+```javascript
+new Range().isUnbounded() // => false
+new Range(5, 5).isUnbounded() // => false
+new Range(null, new Date(2000, 5, 18).isUnbounded() // => true
+new Range(0, Infinity).isUnbounded() // => true
+new Range(-Infinity, Infinity).isUnbounded() // => true
 ```
 
 <a name="Range.parse" />
