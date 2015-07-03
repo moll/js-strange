@@ -123,6 +123,12 @@ Range.prototype.isUnbounded = function() {
 }
 
 /**
+ * @method isInfinite
+ * @alias isUnbounded
+ */
+Range.prototype.isInfinite = Range.prototype.isUnbounded
+
+/**
  * Check if a given value is contained within this range.  
  * Returns `true` or `false`.
  *

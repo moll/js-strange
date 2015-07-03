@@ -94,6 +94,7 @@ For extended documentation on all functions, please see the
 - [isBounded](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isBounded)()
 - [isEmpty](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isEmpty)()
 - [isFinite](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isFinite)()
+- [isInfinite](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isInfinite)()
 - [isUnbounded](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isUnbounded)()
 - [parse](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.parse)(range, [parseEndpoint])
 - [toJSON](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.toJSON)()

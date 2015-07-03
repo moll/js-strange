@@ -9,6 +9,7 @@ stRange.js API Documentation
 - [isBounded](#Range.prototype.isBounded)()
 - [isEmpty](#Range.prototype.isEmpty)()
 - [isFinite](#Range.prototype.isFinite)()
+- [isInfinite](#Range.prototype.isInfinite)()
 - [isUnbounded](#Range.prototype.isUnbounded)()
 - [parse](#Range.parse)(range, [parseEndpoint])
 - [toJSON](#Range.prototype.toJSON)()
@@ -124,6 +125,10 @@ new Range(1, 10).isEmpty() // => false
 <a name="Range.prototype.isFinite" />
 ### Range.prototype.isFinite()
 Alias of [`isBounded`](#Range.prototype.isBounded).  
+
+<a name="Range.prototype.isInfinite" />
+### Range.prototype.isInfinite()
+Alias of [`isUnbounded`](#Range.prototype.isUnbounded).  
 
 <a name="Range.prototype.isUnbounded" />
 ### Range.prototype.isUnbounded()

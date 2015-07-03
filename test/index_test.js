@@ -159,6 +159,12 @@ describe("Range", function() {
     })
   })
 
+  describe(".prototype.isInfinite", function() {
+    it("must be an alias to Range.prototype.isInfinite", function() {
+      Range.prototype.isInfinite.must.equal(Range.prototype.isUnbounded)
+    })
+  })
+
   describe(".prototype.contains", function() {
     it("must return true when contained", function() {
       new Range(10, 20).contains(15).must.be.true()
