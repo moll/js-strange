@@ -99,6 +99,12 @@ Range.prototype.isBounded = function() {
 }
 
 /**
+ * @method isFinite
+ * @alias isBounded
+ */
+Range.prototype.isFinite = Range.prototype.isBounded
+
+/**
  * Check whether the range is unbounded.  
  * An unbounded range is one where either endpoint is `null` or `Infinity`. An
  * empty range is not considered unbounded.

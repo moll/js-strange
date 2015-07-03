@@ -1,9 +1,11 @@
 ## Unreleased
 - Adds [`Range.prototype.isBounded`][].
 - Adds [`Range.prototype.isUnbounded`][].
+- Adds [`Range.prototype.isFinite`][].
 
 [`Range.prototype.isBounded`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isBounded
 [`Range.prototype.isUnbounded`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isUnbounded
+[`Range.prototype.isFinite`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isFinite
 
 ## 1.1.0 (Jun 29, 2015)
 - Adds [`Range.prototype.isEmpty`][].

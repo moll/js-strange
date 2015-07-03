@@ -8,6 +8,7 @@ stRange.js API Documentation
 - [intersects](#Range.prototype.intersects)(other)
 - [isBounded](#Range.prototype.isBounded)()
 - [isEmpty](#Range.prototype.isEmpty)()
+- [isFinite](#Range.prototype.isFinite)()
 - [isUnbounded](#Range.prototype.isUnbounded)()
 - [parse](#Range.parse)(range, [parseEndpoint])
 - [toJSON](#Range.prototype.toJSON)()
@@ -119,6 +120,10 @@ new Range().isEmpty() // => true
 new Range(5, 5, "[)").isEmpty() // => true
 new Range(1, 10).isEmpty() // => false
 ```
+
+<a name="Range.prototype.isFinite" />
+### Range.prototype.isFinite()
+Alias of [`isBounded`](#Range.prototype.isBounded).  
 
 <a name="Range.prototype.isUnbounded" />
 ### Range.prototype.isUnbounded()
