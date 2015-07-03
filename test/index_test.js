@@ -71,6 +71,47 @@ describe("Range", function() {
     })
   })
 
+  describe(".prototype.isBounded", function() {
+    it("must return true given a range with undefined endpoints", function() {
+      new Range(undefined, undefined).isBounded().must.be.true()
+    })
+
+    it("must return true given a range with undefined endpoints", function() {
+      new Range(null, undefined).isBounded().must.be.true()
+      new Range(undefined, null).isBounded().must.be.true()
+    })
+
+    it("must return false given an unbounded range", function() {
+      new Range(null, null).isBounded().must.be.false()
+    })
+
+    it("must return false given a left unbounded range", function() {
+      new Range(null, 1).isBounded().must.be.false()
+    })
+
+    it("must return false given a right unbounded range", function() {
+      new Range(1, null).isBounded().must.be.false()
+    })
+
+    it("must return false given an unbounded range with Infinity", function() {
+      new Range(-Infinity, Infinity).isBounded().must.be.false()
+    })
+
+    it("must return false given a left unbounded range with Infinity",
+      function() {
+      new Range(-Infinity, 1).isBounded().must.be.false()
+    })
+
+    it("must return false given a right unbounded range with Infinity",
+      function() {
+      new Range(1, Infinity).isBounded().must.be.false()
+    })
+
+    it("must return true given a bounded range", function() {
+      new Range(1, 1).isBounded().must.be.true()
+    })
+  })
+
   describe(".prototype.isUnbounded", function() {
     it("must return false given a range with undefined endpoints", function() {
       new Range(undefined, undefined).isUnbounded().must.be.false()

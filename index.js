@@ -80,6 +80,25 @@ Range.prototype.isEmpty = function() {
 }
 
 /**
+ * Check whether the range is bounded.  
+ * A bounded range is one where neither endpoint is `null` or `Infinity`. An
+ * empty range is considered bounded.
+ *
+ * @example
+ * new Range().isBounded() // => true
+ * new Range(5, 5).isBounded() // => true
+ * new Range(null, new Date(2000, 5, 18).isBounded() // => false
+ * new Range(0, Infinity).isBounded() // => false
+ * new Range(-Infinity, Infinity).isBounded() // => false
+ *
+ * @method isBounded
+ */
+Range.prototype.isBounded = function() {
+  if (this.begin === undefined || this.end === undefined) return true
+  return !(isInfinity(this.begin) || isInfinity(this.end))
+}
+
+/**
  * Check whether the range is unbounded.  
  * An unbounded range is one where either endpoint is `null` or `Infinity`. An
  * empty range is not considered unbounded.
@@ -94,8 +113,7 @@ Range.prototype.isEmpty = function() {
  * @method isUnbounded
  */
 Range.prototype.isUnbounded = function() {
-  if (this.begin === undefined || this.end === undefined) return false
-  return isInfinity(this.begin) || isInfinity(this.end)
+  return !this.isBounded()
 }
 
 /**

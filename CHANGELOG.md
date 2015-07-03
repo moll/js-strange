@@ -1,6 +1,8 @@
 ## Unreleased
+- Adds [`Range.prototype.isBounded`][].
 - Adds [`Range.prototype.isUnbounded`][].
 
+[`Range.prototype.isBounded`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isBounded
 [`Range.prototype.isUnbounded`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isUnbounded
 
 ## 1.1.0 (Jun 29, 2015)

@@ -6,6 +6,7 @@ stRange.js API Documentation
 - [end](#range.end)
 - [contains](#Range.prototype.contains)(value)
 - [intersects](#Range.prototype.intersects)(other)
+- [isBounded](#Range.prototype.isBounded)()
 - [isEmpty](#Range.prototype.isEmpty)()
 - [isUnbounded](#Range.prototype.isUnbounded)()
 - [parse](#Range.parse)(range, [parseEndpoint])
@@ -84,6 +85,21 @@ new Range(0, 10).intersects(new Range(5, 7)) // => true
 new Range(0, 10).intersects(new Range(10, 20)) // => true
 new Range(0, 10, "[)").intersects(new Range(10, 20)) // => false
 new Range(0, 10).intersects(new Range(20, 30)) // => false
+```
+
+<a name="Range.prototype.isBounded" />
+### Range.prototype.isBounded()
+Check whether the range is bounded.  
+A bounded range is one where neither endpoint is `null` or `Infinity`. An
+empty range is considered bounded.
+
+**Examples**:
+```javascript
+new Range().isBounded() // => true
+new Range(5, 5).isBounded() // => true
+new Range(null, new Date(2000, 5, 18).isBounded() // => false
+new Range(0, Infinity).isBounded() // => false
+new Range(-Infinity, Infinity).isBounded() // => false
 ```
 
 <a name="Range.prototype.isEmpty" />
