@@ -1,7 +1,7 @@
 {
 	"name": "strange",
 	"version": "1.2.0",
-	"description": "Range object. Supports exclusive and infinite ranges.",
+	"description": "Range aka interval object. Supports exclusive and infinite ranges.",
 	"keywords": [
 		"range",
 		"ranges",
