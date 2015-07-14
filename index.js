@@ -76,7 +76,7 @@ function Range(begin, end, bounds) {
  */
 Range.prototype.isEmpty = function() {
   if (this.begin === undefined || this.end === undefined) return true
-  return this.bounds != "[]" && isEqual(this.begin, this.end)
+  return this.bounds != "[]" && compare(this.begin, this.end) === 0
 }
 
 /**
@@ -229,14 +229,39 @@ Range.parse = function(range, parse) {
   return new Range(begin, end, range[0] + range[range.length - 1])
 }
 
+/**
+ * Compares two range's beginnings.  
+ * Returns `-1` if `a` begins before `b` begins, `0` if they're equal and `1`
+ * if `a` begins after `b`.
+ *
+ * @example
+ * Range.compareBeginToBegin(new Range(0, 10), new Range(5, 15)) // => -1
+ * Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15)) // => 0
+ * Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15, "()")) // => -1
+ *
+ * @static
+ * @method compareBeginToBegin
+ * @param {Object} a
+ * @param {Object} b
+ */
+Range.compareBeginToBegin = function(a, b) {
+  if (a.bounds[0] === b.bounds[0]) return compare(a.begin, b.begin)
+  else return compare(a.begin, b.begin) || (b.bounds[0] === "(" ? -1 : 1)
+}
+
 function stringify(value) { return isInfinity(value) ? "" : String(value) }
 
 function isInfinity(value) {
   return value === null || value === Infinity || value === -Infinity
 }
 
-// Use < and > for coercion into valueOf.
-function isEqual(a, b) { return !(a < b || b < a) }
+function compare(a, b) {
+  if (a === null && b === null) return 0
+  if (a === null && b !== null) return -1
+  if (a !== null && b === null) return 1
+  // The less-than operator ensures coercion with valueOf.
+  return a < b ? -1 : b < a ? 1 : 0
+}
 
 function isBeginBeforeEnd(a, b) {
   if (a.bounds[0] === "[" && b.bounds[1] === "]") return a.begin <= b.end

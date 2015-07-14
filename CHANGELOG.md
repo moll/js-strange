@@ -1,3 +1,8 @@
+## Unreleased
+- Adds [`Range.compareBeginToBegin`][].
+
+[`Range.compareBeginToBegin`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareBeginToBegin
+
 ## 1.2.0 (Jul 4, 2015)
 - Adds [`Range.prototype.isBounded`][].
 - Adds [`Range.prototype.isUnbounded`][].

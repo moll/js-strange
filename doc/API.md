@@ -4,6 +4,7 @@ stRange.js API Documentation
 - [begin](#range.begin)
 - [bounds](#range.bounds)
 - [end](#range.end)
+- [compareBeginToBegin](#Range.compareBeginToBegin)(a, b)
 - [contains](#Range.prototype.contains)(value)
 - [intersects](#Range.prototype.intersects)(other)
 - [isBounded](#Range.prototype.isBounded)()
@@ -59,6 +60,19 @@ new Range(1, 5, "[)").bounds // => "[)"
 <a name="range.end" />
 ### range.end
 Range's end, or right endpoint.
+
+<a name="Range.compareBeginToBegin" />
+### Range.compareBeginToBegin(a, b)
+Compares two range's beginnings.  
+Returns `-1` if `a` begins before `b` begins, `0` if they're equal and `1`
+if `a` begins after `b`.
+
+**Examples**:
+```javascript
+Range.compareBeginToBegin(new Range(0, 10), new Range(5, 15)) // => -1
+Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15)) // => 0
+Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15, "()")) // => -1
+```
 
 <a name="Range.prototype.contains" />
 ### Range.prototype.contains(value)
