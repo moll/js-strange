@@ -369,30 +369,6 @@ describe("Range", function() {
     })
   })
 
-  describe(".parse", function() {
-    it("must parse string with bounds", function() {
-      Range.parse("[a,z]").must.eql(new Range("a", "z", "[]"))
-      Range.parse("(a,z)").must.eql(new Range("a", "z", "()"))
-      Range.parse("[a,z)").must.eql(new Range("a", "z", "[)"))
-      Range.parse("(a,z]").must.eql(new Range("a", "z", "(]"))
-    })
-
-    it("must parse endpoint with given function", function() {
-      Range.parse("[42,69]", Number).must.eql(new Range(42, 69))
-    })
-
-    it("must parse string with infinite bounds", function() {
-      Range.parse("[a,]").must.eql(new Range("a", null))
-      Range.parse("[,z]").must.eql(new Range(null, "z"))
-    })
-
-    it("must parse string with infinite bounds given parse function",
-      function() {
-      Range.parse("[42,]", Number).must.eql(new Range(42, null))
-      Range.parse("[,69]", Number).must.eql(new Range(null, 69))
-    })
-  })
-
   describe(".compareBeginToBegin", function() {
     function compare(a, b) {
       var result = Range.compareBeginToBegin(a, b)
@@ -558,6 +534,30 @@ describe("Range", function() {
         var b = new Range(0, Infinity, "(]")
         compare(a, b).must.equal(-1)
       })
+    })
+  })
+
+  describe(".parse", function() {
+    it("must parse string with bounds", function() {
+      Range.parse("[a,z]").must.eql(new Range("a", "z", "[]"))
+      Range.parse("(a,z)").must.eql(new Range("a", "z", "()"))
+      Range.parse("[a,z)").must.eql(new Range("a", "z", "[)"))
+      Range.parse("(a,z]").must.eql(new Range("a", "z", "(]"))
+    })
+
+    it("must parse endpoint with given function", function() {
+      Range.parse("[42,69]", Number).must.eql(new Range(42, 69))
+    })
+
+    it("must parse string with infinite bounds", function() {
+      Range.parse("[a,]").must.eql(new Range("a", null))
+      Range.parse("[,z]").must.eql(new Range(null, "z"))
+    })
+
+    it("must parse string with infinite bounds given parse function",
+      function() {
+      Range.parse("[42,]", Number).must.eql(new Range(42, null))
+      Range.parse("[,69]", Number).must.eql(new Range(null, 69))
     })
   })
 })

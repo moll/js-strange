@@ -207,29 +207,6 @@ Range.prototype.toJSON = Range.prototype.toString
 Range.prototype.inspect = Range.prototype.toString
 
 /**
- * Parses a string stringified by
- * [`Range.prototype.toString`](#Range.prototype.toString).
- *
- * To have it also parse the endpoints to something other than a string, pass
- * a function as the second argument.
- *
- * @example
- * Range.parse("[a,z)") // => new Range("a", "z", "[)")
- * Range.parse("[42,69]", Number) // => new Range(42, 69)
- *
- * @static
- * @method parse
- * @param {String} range
- * @param {Function} [parseEndpoint]
- */
-Range.parse = function(range, parse) {
-  var endpoints = range.slice(1, -1).split(",", 2)
-  var begin = endpoints[0] ? parse ? parse(endpoints[0]) : endpoints[0] : null
-  var end = endpoints[1] ? parse ? parse(endpoints[1]) : endpoints[1] : null
-  return new Range(begin, end, range[0] + range[range.length - 1])
-}
-
-/**
  * Compares two range's beginnings.  
  * Returns `-1` if `a` begins before `b` begins, `0` if they're equal and `1`
  * if `a` begins after `b`.
@@ -267,6 +244,29 @@ Range.compareBeginToBegin = function(a, b) {
 Range.compareEndToEnd = function(a, b) {
   if (a.bounds[1] === b.bounds[1]) return compare(a.end, b.end)
   else return compare(a.end, b.end) || (a.bounds[1] === ")" ? -1 : 1)
+}
+
+/**
+ * Parses a string stringified by
+ * [`Range.prototype.toString`](#Range.prototype.toString).
+ *
+ * To have it also parse the endpoints to something other than a string, pass
+ * a function as the second argument.
+ *
+ * @example
+ * Range.parse("[a,z)") // => new Range("a", "z", "[)")
+ * Range.parse("[42,69]", Number) // => new Range(42, 69)
+ *
+ * @static
+ * @method parse
+ * @param {String} range
+ * @param {Function} [parseEndpoint]
+ */
+Range.parse = function(range, parse) {
+  var endpoints = range.slice(1, -1).split(",", 2)
+  var begin = endpoints[0] ? parse ? parse(endpoints[0]) : endpoints[0] : null
+  var end = endpoints[1] ? parse ? parse(endpoints[1]) : endpoints[1] : null
+  return new Range(begin, end, range[0] + range[range.length - 1])
 }
 
 function stringify(value) { return isInfinity(value) ? "" : String(value) }
