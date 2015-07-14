@@ -58,6 +58,24 @@ function Range(begin, end, bounds) {
 }
 
 /**
+ * Compares this range's beginning with the given value.  
+ * Returns `-1` if this range begins before the given value, `0` if they're
+ * equal and `1` if this range begins after the given value.
+ *
+ * @example
+ * new Range(0, 10).compareBegin(5) // => -1
+ * new Range(0, 10).compareBegin(0) // => 0
+ * new Range(5, 10).compareBegin(0) // => 1
+ *
+ * @method compareBegin
+ * @param {Object} begin
+ */
+Range.prototype.compareBegin = function(begin) {
+  if (this.bounds[0] == "[") return compare(this.begin, begin)
+  else return compare(this.begin, begin) || 1
+}
+
+/**
  * Check whether the range is empty.  
  * An empty range is one with `undefined` endpoints (like `new Range`) or
  * a range with two equivalent, but exculsive endpoints (`new Range(5, 5,
