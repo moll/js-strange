@@ -4,18 +4,18 @@ stRange.js API Documentation
 - [begin](#range.begin)
 - [bounds](#range.bounds)
 - [end](#range.end)
-- [compareBeginToBegin](#Range.compareBeginToBegin)(a, b)
-- [compareEndToEnd](#Range.compareEndToEnd)(a, b)
-- [contains](#Range.prototype.contains)(value)
-- [intersects](#Range.prototype.intersects)(other)
-- [isBounded](#Range.prototype.isBounded)()
-- [isEmpty](#Range.prototype.isEmpty)()
-- [isFinite](#Range.prototype.isFinite)()
-- [isInfinite](#Range.prototype.isInfinite)()
-- [isUnbounded](#Range.prototype.isUnbounded)()
-- [parse](#Range.parse)(range, [parseEndpoint])
-- [toJSON](#Range.prototype.toJSON)()
-- [toString](#Range.prototype.toString)()
+- [.prototype.contains](#Range.prototype.contains)(value)
+- [.prototype.intersects](#Range.prototype.intersects)(other)
+- [.prototype.isBounded](#Range.prototype.isBounded)()
+- [.prototype.isEmpty](#Range.prototype.isEmpty)()
+- [.prototype.isFinite](#Range.prototype.isFinite)()
+- [.prototype.isInfinite](#Range.prototype.isInfinite)()
+- [.prototype.isUnbounded](#Range.prototype.isUnbounded)()
+- [.prototype.toJSON](#Range.prototype.toJSON)()
+- [.prototype.toString](#Range.prototype.toString)()
+- [.compareBeginToBegin](#Range.compareBeginToBegin)(a, b)
+- [.compareEndToEnd](#Range.compareEndToEnd)(a, b)
+- [.parse](#Range.parse)(range, [parseEndpoint])
 
 
 <a name="Range" />
@@ -61,32 +61,6 @@ new Range(1, 5, "[)").bounds // => "[)"
 <a name="range.end" />
 ### range.end
 Range's end, or right endpoint.
-
-<a name="Range.compareBeginToBegin" />
-### Range.compareBeginToBegin(a, b)
-Compares two range's beginnings.  
-Returns `-1` if `a` begins before `b` begins, `0` if they're equal and `1`
-if `a` begins after `b`.
-
-**Examples**:
-```javascript
-Range.compareBeginToBegin(new Range(0, 10), new Range(5, 15)) // => -1
-Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15)) // => 0
-Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15, "()")) // => -1
-```
-
-<a name="Range.compareEndToEnd" />
-### Range.compareEndToEnd(a, b)
-Compares two range's endings.  
-Returns `-1` if `a` ends before `b` ends, `0` if they're equal and `1`
-if `a` ends after `b`.
-
-**Examples**:
-```javascript
-Range.compareEndToEnd(new Range(0, 10), new Range(5, 15)) // => -1
-Range.compareEndToEnd(new Range(0, 10), new Range(5, 10)) // => 0
-Range.compareEndToEnd(new Range(0, 10), new Range(5, 10, "()")) // => 1
-```
 
 <a name="Range.prototype.contains" />
 ### Range.prototype.contains(value)
@@ -173,20 +147,6 @@ new Range(0, Infinity).isUnbounded() // => true
 new Range(-Infinity, Infinity).isUnbounded() // => true
 ```
 
-<a name="Range.parse" />
-### Range.parse(range, [parseEndpoint])
-Parses a string stringified by
-[`Range.prototype.toString`](#Range.prototype.toString).
-
-To have it also parse the endpoints to something other than a string, pass
-a function as the second argument.
-
-**Examples**:
-```javascript
-Range.parse("[a,z)") // => new Range("a", "z", "[)")
-Range.parse("[42,69]", Number) // => new Range(42, 69)
-```
-
 <a name="Range.prototype.toJSON" />
 ### Range.prototype.toJSON()
 Alias of [`toString`](#Range.prototype.toString).  
@@ -210,4 +170,44 @@ therefore use stRange.js to parse and stringify ranges for your database.
 ```javascript
 new Range(1, 5).toString() // => "[1,5]"
 new Range(1, 10, "[)").toString() // => "[1,10)"
+```
+
+<a name="Range.compareBeginToBegin" />
+### Range.compareBeginToBegin(a, b)
+Compares two range's beginnings.  
+Returns `-1` if `a` begins before `b` begins, `0` if they're equal and `1`
+if `a` begins after `b`.
+
+**Examples**:
+```javascript
+Range.compareBeginToBegin(new Range(0, 10), new Range(5, 15)) // => -1
+Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15)) // => 0
+Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15, "()")) // => -1
+```
+
+<a name="Range.compareEndToEnd" />
+### Range.compareEndToEnd(a, b)
+Compares two range's endings.  
+Returns `-1` if `a` ends before `b` ends, `0` if they're equal and `1`
+if `a` ends after `b`.
+
+**Examples**:
+```javascript
+Range.compareEndToEnd(new Range(0, 10), new Range(5, 15)) // => -1
+Range.compareEndToEnd(new Range(0, 10), new Range(5, 10)) // => 0
+Range.compareEndToEnd(new Range(0, 10), new Range(5, 10, "()")) // => 1
+```
+
+<a name="Range.parse" />
+### Range.parse(range, [parseEndpoint])
+Parses a string stringified by
+[`Range.prototype.toString`](#Range.prototype.toString).
+
+To have it also parse the endpoints to something other than a string, pass
+a function as the second argument.
+
+**Examples**:
+```javascript
+Range.parse("[a,z)") // => new Range("a", "z", "[)")
+Range.parse("[42,69]", Number) // => new Range(42, 69)
 ```
