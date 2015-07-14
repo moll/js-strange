@@ -253,9 +253,14 @@ Range.compareEndToEnd = function(a, b) {
  * To have it also parse the endpoints to something other than a string, pass
  * a function as the second argument.
  *
+ * If you pass `Number` as the _parse_ function and the endpoints are
+ * unbounded, they'll be set to `Infinity` for easier computation.
+ *
  * @example
  * Range.parse("[a,z)") // => new Range("a", "z", "[)")
  * Range.parse("[42,69]", Number) // => new Range(42, 69)
+ * Range.parse("[15,]", Number) // => new Range(15, Infinity)
+ * Range.parse("(,3.14]", Number) // => new Range(-Infinity, 3.14, "(]")
  *
  * @static
  * @method parse
@@ -266,6 +271,8 @@ Range.parse = function(range, parse) {
   var endpoints = range.slice(1, -1).split(",", 2)
   var begin = endpoints[0] ? parse ? parse(endpoints[0]) : endpoints[0] : null
   var end = endpoints[1] ? parse ? parse(endpoints[1]) : endpoints[1] : null
+  if (parse === Number && begin === null) begin = -Infinity
+  if (parse === Number && end === null) end = Infinity
   return new Range(begin, end, range[0] + range[range.length - 1])
 }
 

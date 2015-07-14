@@ -206,8 +206,13 @@ Parses a string stringified by
 To have it also parse the endpoints to something other than a string, pass
 a function as the second argument.
 
+If you pass `Number` as the _parse_ function and the endpoints are
+unbounded, they'll be set to `Infinity` for easier computation.
+
 **Examples**:
 ```javascript
 Range.parse("[a,z)") // => new Range("a", "z", "[)")
 Range.parse("[42,69]", Number) // => new Range(42, 69)
+Range.parse("[15,]", Number) // => new Range(15, Infinity)
+Range.parse("(,3.14]", Number) // => new Range(-Infinity, 3.14, "(]")
 ```

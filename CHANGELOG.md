@@ -2,6 +2,14 @@
 - Adds [`Range.compareBeginToBegin`][].
 - Adds [`Range.compareEndToEnd`][].
 
+- Sets numeric unbounded endpoints to `-Infinity`/`Infinity` if you pass
+  `Number` to [`Range.parse`][] as the parse function.
+
+  ```javascript
+  Range.parse("[15,]", Number) // => new Range(15, Infinity)
+  Range.parse("(,3.14]", Number) // => new Range(-Infinity, 3.14, "(]")
+  ```
+
 [`Range.compareBeginToBegin`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareBeginToBegin
 [`Range.compareEndToEnd`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareEndToEnd
 

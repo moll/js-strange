@@ -556,8 +556,16 @@ describe("Range", function() {
 
     it("must parse string with infinite bounds given parse function",
       function() {
-      Range.parse("[42,]", Number).must.eql(new Range(42, null))
-      Range.parse("[,69]", Number).must.eql(new Range(null, 69))
+      var toUpperCase = Function.call.bind(String.prototype.toUpperCase)
+      Range.parse("[a,]", toUpperCase).must.eql(new Range("A", null))
+      Range.parse("[,b]", toUpperCase).must.eql(new Range(null, "B"))
+      Range.parse("(,)", toUpperCase).must.eql(new Range(null, null, "()"))
+    })
+
+    it("must parse string with infinite bounds given Number", function() {
+      Range.parse("[42,]", Number).must.eql(new Range(42, Infinity))
+      Range.parse("[,69]", Number).must.eql(new Range(-Infinity, 69))
+      Range.parse("(,)", Number).must.eql(new Range(-Infinity, Infinity, "()"))
     })
   })
 })
