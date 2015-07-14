@@ -249,6 +249,26 @@ Range.compareBeginToBegin = function(a, b) {
   else return compare(a.begin, b.begin) || (b.bounds[0] === "(" ? -1 : 1)
 }
 
+/**
+ * Compares two range's endings.  
+ * Returns `-1` if `a` ends before `b` ends, `0` if they're equal and `1`
+ * if `a` ends after `b`.
+ *
+ * @example
+ * Range.compareEndToEnd(new Range(0, 10), new Range(5, 15)) // => -1
+ * Range.compareEndToEnd(new Range(0, 10), new Range(5, 10)) // => 0
+ * Range.compareEndToEnd(new Range(0, 10), new Range(5, 10, "()")) // => 1
+ *
+ * @static
+ * @method compareEndToEnd
+ * @param {Object} a
+ * @param {Object} b
+ */
+Range.compareEndToEnd = function(a, b) {
+  if (a.bounds[1] === b.bounds[1]) return compare(a.end, b.end)
+  else return compare(a.end, b.end) || (a.bounds[1] === ")" ? -1 : 1)
+}
+
 function stringify(value) { return isInfinity(value) ? "" : String(value) }
 
 function isInfinity(value) {

@@ -476,4 +476,88 @@ describe("Range", function() {
       })
     })
   })
+
+  describe(".compareEndToEnd", function() {
+    function compare(a, b) {
+      var result = Range.compareEndToEnd(a, b)
+      Range.compareEndToEnd(b, a).must.eql(result * -1)
+      return result
+    }
+
+    function testWithBounds(bounds) {
+      it("must return 0 if equal", function() {
+        var a = new Range(0, 10, bounds)
+        var b = new Range(5, 10, bounds)
+        compare(a, b).must.equal(0)
+      })
+
+      it("must return -1 if less", function() {
+        var a = new Range(0, 9, bounds)
+        var b = new Range(0, 10, bounds)
+        compare(a, b).must.equal(-1)
+      })
+
+      it("must return 0 if equal and unbounded", function() {
+        var a = new Range(0, null, bounds)
+        var b = new Range(5, null, bounds)
+        compare(a, b).must.equal(0)
+      })
+
+      it("must return 0 if equal and unbounded with Infinity", function() {
+        var a = new Range(0, Infinity, bounds)
+        var b = new Range(5, Infinity, bounds)
+        compare(a, b).must.equal(0)
+      })
+
+      it("must return 1 if one unbounded", function() {
+        var a = new Range(0, 10, bounds)
+        var b = new Range(0, null, bounds)
+        compare(a, b).must.equal(1)
+      })
+
+      it("must return -1 if one unbounded with -Infinity", function() {
+        var a = new Range(-Infinity, -Infinity, bounds)
+        var b = new Range(0, 10, bounds)
+        compare(a, b).must.equal(-1)
+      })
+
+      it("must return -1 if one unbounded with Infinity", function() {
+        var a = new Range(0, 10, bounds)
+        var b = new Range(0, Infinity, bounds)
+        compare(a, b).must.equal(-1)
+      })
+    }
+
+    describe("with inclusive bounds", testWithBounds.bind(null, "[]"))
+    describe("with exclusive bounds", testWithBounds.bind(null, "()"))
+
+    describe("with different bounds", function() {
+      it("must return -1 if equal", function() {
+        compare(new Range(0, 10, "()"), new Range(0, 10, "(]")).must.equal(-1)
+      })
+
+      it("must return -1 if one less", function() {
+        compare(new Range(0, 9, "(]"), new Range(0, 10, "()")).must.equal(-1)
+        compare(new Range(0, 9, "()"), new Range(0, 10, "(]")).must.equal(-1)
+      })
+
+      it("must return -1 if equal and unbounded", function() {
+        var a = new Range(0, null, "[)")
+        var b = new Range(0, null, "[]")
+        compare(a, b).must.equal(-1)
+      })
+
+      it("must return -1 if equal and unbounded with -Infinity", function() {
+        var a = new Range(-Infinity, -Infinity, "[)")
+        var b = new Range(-Infinity, -Infinity, "[]")
+        compare(a, b).must.equal(-1)
+      })
+
+      it("must return -1 if equal and unbounded with Infinity", function() {
+        var a = new Range(0, Infinity, "()")
+        var b = new Range(0, Infinity, "(]")
+        compare(a, b).must.equal(-1)
+      })
+    })
+  })
 })

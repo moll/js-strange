@@ -1,7 +1,9 @@
 ## Unreleased
 - Adds [`Range.compareBeginToBegin`][].
+- Adds [`Range.compareEndToEnd`][].
 
 [`Range.compareBeginToBegin`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareBeginToBegin
+[`Range.compareEndToEnd`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareEndToEnd
 
 ## 1.2.0 (Jul 4, 2015)
 - Adds [`Range.prototype.isBounded`][].
