@@ -338,6 +338,8 @@ function isInfinity(value) {
 function compare(a, b) { return a < b ? -1 : b < a ? 1 : 0 }
 
 function isBeginBeforeEnd(a, b) {
-  if (a.bounds[0] === "[" && b.bounds[1] === "]") return a.begin <= b.end
-  else return a.begin < b.end
+  var aBegin = a.begin === null ? -Infinity : a.begin
+  var bEnd = b.end === null ? Infinity : b.end
+  if (a.bounds[0] === "[" && b.bounds[1] === "]") return aBegin <= bEnd
+  return aBegin < bEnd
 }

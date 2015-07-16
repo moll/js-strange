@@ -327,60 +327,65 @@ describe("Range", function() {
       return result
     }
 
-    it("must return true when intersecting", function() {
-      var a = new Range(10, 20)
-      var b = new Range(5, 15)
-      intersects(a, b).must.be.true()
-    })
+    function testWithBounds(bounds) {
+      it("must return true when equal", function() {
+        var a = new Range(10, 20, bounds)
+        var b = new Range(10, 20, bounds)
+        intersects(a, b).must.be.true()
+      })
 
-    it("must return false when intersecting, but one of zero size", function() {
-      var a = new Range(0, 10)
-      var b = new Range(5, 5, "[)")
-      intersects(a, b).must.be.false()
-    })
+      it("must return true when intersecting", function() {
+        var a = new Range(10, 20, bounds)
+        var b = new Range(5, 15, bounds)
+        intersects(a, b).must.be.true()
+      })
 
-    it("must return false when intersecting, but one empty", function() {
-      var a = new Range(0, 10)
-      var b = new Range
-      intersects(a, b).must.be.false()
-    })
+      it("must return false when intersecting, but one empty", function() {
+        var a = new Range(0, 10, bounds)
+        var b = new Range(undefined, undefined, bounds)
+        intersects(a, b).must.be.false()
+      })
 
-    it("must return false when not intersecting", function() {
-      var a = new Range(0, 10)
-      var b = new Range(30, 40)
-      intersects(a, b).must.be.false()
-    })
+      it("must return false when intersecting, but one of zero size",
+        function() {
+        var a = new Range(0, 10, bounds)
+        var b = new Range(5, 5, "[)")
+        intersects(a, b).must.be.false()
+      })
 
-    it("must return true when intersecting and one unbounded", function() {
-      var a = new Range(0, 10)
-      var b = new Range(5, null)
-      intersects(a, b).must.be.true()
-    })
+      it("must return false when not intersecting", function() {
+        var a = new Range(0, 10, bounds)
+        var b = new Range(30, 40, bounds)
+        intersects(a, b).must.be.false()
+      })
 
-    it("must return true when one encloses the other", function() {
-      var a = new Range(0, 10)
-      var b = new Range(3, 6)
-      intersects(a, b).must.be.true()
-    })
+      it("must return true when intersecting and one unbounded", function() {
+        var a = new Range(0, 10, bounds)
+        var b = new Range(5, null, bounds)
+        intersects(a, b).must.be.true()
+      })
+
+      it("must return true when one encloses the other", function() {
+        var a = new Range(0, 10, bounds)
+        var b = new Range(3, 6, bounds)
+        intersects(a, b).must.be.true()
+      })
+
+      it("must return true when one encloses the other and is unbounded",
+        function() {
+        var a = new Range(0, 10, bounds)
+        var b = new Range(null, null, bounds)
+        intersects(a, b).must.be.true()
+      })
+    }
+
+    describe("with inclusive bounds", testWithBounds.bind(null, "[]"))
+    describe("with exclusive bounds", testWithBounds.bind(null, "()"))
 
     it("must return true when one encloses the other, but one exclusive",
       function() {
       var a = new Range(0, 10)
       var b = new Range(3, 6, "()")
-      intersects(a, b).must.be.true()
-    })
-
-    it("must return true when one encloses the other, but both exclusive",
-      function() {
-      var a = new Range(0, 10, "()")
-      var b = new Range(3, 6, "()")
-      intersects(a, b).must.be.true()
-    })
-
-    it("must return true when one encloses the other and is unbounded",
-      function() {
-      var a = new Range(0, 10)
-      var b = new Range(null, null)
       intersects(a, b).must.be.true()
     })
 

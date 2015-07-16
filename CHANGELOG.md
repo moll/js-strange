@@ -12,6 +12,9 @@
   Range.parse("(,3.14]", Number) // => new Range(-Infinity, 3.14, "(]")
   ```
 
+- Fixes [`Range.prototype.intersects`][] to handle exclusive unbounded ranges
+  properly.
+
 [`Range.compareBeginToBegin`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareBeginToBegin
 [`Range.compareEndToEnd`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareEndToEnd
 [`Range.prototype.compareBegin`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.compareBegin
