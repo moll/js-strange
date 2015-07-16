@@ -268,8 +268,10 @@ Range.prototype.inspect = Range.prototype.toString
  * @param {Object} b
  */
 Range.compareBeginToBegin = function(a, b) {
-  if (a.bounds[0] === b.bounds[0]) return compare(a.begin, b.begin)
-  else return compare(a.begin, b.begin) || (b.bounds[0] === "(" ? -1 : 1)
+  var aBegin = a.begin === null ? -Infinity : a.begin
+  var bBegin = b.begin === null ? -Infinity : b.begin
+  if (a.bounds[0] === b.bounds[0]) return compare(aBegin, bBegin)
+  else return compare(aBegin, bBegin) || (b.bounds[0] === "(" ? -1 : 1)
 }
 
 /**
@@ -288,8 +290,10 @@ Range.compareBeginToBegin = function(a, b) {
  * @param {Object} b
  */
 Range.compareEndToEnd = function(a, b) {
-  if (a.bounds[1] === b.bounds[1]) return compare(a.end, b.end)
-  else return compare(a.end, b.end) || (a.bounds[1] === ")" ? -1 : 1)
+  var aEnd = a.end === null ? Infinity : a.end
+  var bEnd = b.end === null ? Infinity : b.end
+  if (a.bounds[1] === b.bounds[1]) return compare(aEnd, bEnd)
+  else return compare(aEnd, bEnd) || (a.bounds[1] === ")" ? -1 : 1)
 }
 
 /**
@@ -328,13 +332,8 @@ function isInfinity(value) {
   return value === null || value === Infinity || value === -Infinity
 }
 
-function compare(a, b) {
-  if (a === null && b === null) return 0
-  if (a === null && b !== null) return -1
-  if (a !== null && b === null) return 1
-  // The less-than operator ensures coercion with valueOf.
-  return a < b ? -1 : b < a ? 1 : 0
-}
+// The less-than operator ensures coercion with valueOf.
+function compare(a, b) { return a < b ? -1 : b < a ? 1 : 0 }
 
 function isBeginBeforeEnd(a, b) {
   if (a.bounds[0] === "[" && b.bounds[1] === "]") return a.begin <= b.end

@@ -545,22 +545,22 @@ describe("Range", function() {
         compare(a, b).must.equal(0)
       })
 
-      it("must return -1 if less", function() {
-        var a = new Range(0, 9, bounds)
-        var b = new Range(0, 10, bounds)
-        compare(a, b).must.equal(-1)
-      })
-
       it("must return 0 if equal and unbounded", function() {
         var a = new Range(0, null, bounds)
         var b = new Range(5, null, bounds)
         compare(a, b).must.equal(0)
       })
 
-      it("must return 1 if one unbounded", function() {
+      it("must return -1 if less", function() {
+        var a = new Range(0, 9, bounds)
+        var b = new Range(0, 10, bounds)
+        compare(a, b).must.equal(-1)
+      })
+
+      it("must return -1 if one unbounded", function() {
         var a = new Range(0, 10, bounds)
         var b = new Range(0, null, bounds)
-        compare(a, b).must.equal(1)
+        compare(a, b).must.equal(-1)
       })
     }
 
