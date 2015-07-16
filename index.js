@@ -121,8 +121,10 @@ Range.prototype.compareEnd = function(end) {
  * @method isEmpty
  */
 Range.prototype.isEmpty = function() {
-  if (this.begin === undefined || this.end === undefined) return true
-  return this.bounds != "[]" && compare(this.begin, this.end) === 0
+  var a = this.begin === null ? -Infinity : this.begin
+  var b = this.end === null ? Infinity : this.end
+  if (a === undefined || b === undefined) return true
+  return this.bounds != "[]" && compare(a, b) === 0
 }
 
 /**

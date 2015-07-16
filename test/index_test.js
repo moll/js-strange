@@ -44,15 +44,16 @@ describe("Range", function() {
   describe(".prototype.isEmpty", function() {
     it("must return true given a range with undefined endpoints", function() {
       new Range(undefined, undefined).isEmpty().must.be.true()
-    })
-
-    it("must return true given a range with undefined endpoints", function() {
       new Range(null, undefined).isEmpty().must.be.true()
       new Range(undefined, null).isEmpty().must.be.true()
     })
 
-    it("must return false given a range with unbounded endpoints", function() {
+    it("must return false given an unbounded range", function() {
       new Range(null, null).isEmpty().must.be.false()
+    })
+
+    it("must return false given an unbounded exclusive range", function() {
+      new Range(null, null, "()").isEmpty().must.be.false()
     })
 
     it("must return true if exclusive with equivalent endpoints", function() {
