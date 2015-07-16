@@ -296,23 +296,18 @@ describe("Range", function() {
       new Range().contains(5).must.be.false()
     })
 
-    it("must return true if one endpoint Infinity", function() {
-      new Range(0, Infinity).contains(10).must.be.true()
-      new Range(-Infinity, 0).contains(-10).must.be.true()
-    })
-
-    it("must return true if one endpoint null", function() {
+    it("must return true if one endpoint unbounded", function() {
       new Range(0, null).contains(10).must.be.true()
       new Range(null, 0).contains(-10).must.be.true()
     })
 
-    it("must return true if one endpoint null and on inclusive boundary",
+    it("must return true if one endpoint unbounded and on inclusive boundary",
       function() {
       new Range(0, null).contains(0).must.be.true()
       new Range(null, 0).contains(0).must.be.true()
     })
 
-    it("must return false if one endpoint null and on exclusive boundary",
+    it("must return false if one endpoint unbounded and on exclusive boundary",
       function() {
       new Range(0, null, "(]").contains(0).must.be.false()
       new Range(null, 0, "[)").contains(0).must.be.false()
@@ -355,13 +350,7 @@ describe("Range", function() {
       intersects(a, b).must.be.false()
     })
 
-    it("must return true when intersecting and one Infinity", function() {
-      var a = new Range(0, 10)
-      var b = new Range(5, Infinity)
-      intersects(a, b).must.be.true()
-    })
-
-    it("must return true when intersecting and one null", function() {
+    it("must return true when intersecting and one unbounded", function() {
       var a = new Range(0, 10)
       var b = new Range(5, null)
       intersects(a, b).must.be.true()
@@ -387,14 +376,8 @@ describe("Range", function() {
       intersects(a, b).must.be.true()
     })
 
-    it("must return true when one encloses the other and is Infinity",
+    it("must return true when one encloses the other and is unbounded",
       function() {
-      var a = new Range(0, 10)
-      var b = new Range(-Infinity, Infinity)
-      intersects(a, b).must.be.true()
-    })
-
-    it("must return true when one encloses the other and is null", function() {
       var a = new Range(0, 10)
       var b = new Range(null, null)
       intersects(a, b).must.be.true()
