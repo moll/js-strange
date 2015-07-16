@@ -171,66 +171,104 @@ describe("Range", function() {
         new Range(0, 10, "[)").compareBegin(0).must.equal(0)
       })
 
-      it("must return 1 if given endpoint less than", function() {
-        new Range(0, 10, "[)").compareBegin(-1).must.equal(1)
+      it("must return 0 if unbounded and equal", function() {
+        new Range(null, 10, "[)").compareBegin(null).must.equal(0)
       })
 
       it("must return -1 if given endpoint greater than", function() {
         new Range(0, 10, "[)").compareBegin(11).must.equal(-1)
       })
 
-      it("must return 0 if unbounded and equal", function() {
-        new Range(null, 10, "[)").compareBegin(null).must.equal(0)
-      })
-
-      it("must return 0 if unbounded with -Infinity and equal", function() {
-        new Range(-Infinity, 10, "[)").compareBegin(-Infinity).must.equal(0)
-      })
-
       it("must return -1 if unbounded", function() {
         new Range(null, 10, "[)").compareBegin(11).must.equal(-1)
       })
 
-      it("must return -1 if unbounded with -Infinity", function() {
-        new Range(-Infinity, 10, "[)").compareBegin(0).must.equal(-1)
+      it("must return 1 if given endpoint less than", function() {
+        new Range(0, 10, "[)").compareBegin(-1).must.equal(1)
       })
 
-      it("must return 1 if unbounded with Infinity", function() {
-        new Range(Infinity, Infinity, "[)").compareBegin(0).must.equal(1)
+      it("must return 1 given null", function() {
+        new Range(0, 10, "[)").compareBegin(null).must.equal(1)
       })
     })
 
     describe("with exclusive bound", function() {
-      it("must return 1 if given endpoint equal", function() {
-        new Range(0, 10, "(]").compareBegin(0).must.equal(1)
-      })
-
-      it("must return 1 if given endpoint less than", function() {
-        new Range(0, 10, "(]").compareBegin(-1).must.equal(1)
-      })
-
       it("must return -1 if given endpoint greater than", function() {
         new Range(0, 10, "(]").compareBegin(1).must.equal(-1)
-      })
-
-      it("must return 1 if unbounded and equal", function() {
-        new Range(null, 10, "(]").compareBegin(null).must.equal(1)
-      })
-
-      it("must return 1 if unbounded with -Infinity and equal", function() {
-        new Range(-Infinity, 10, "(]").compareBegin(-Infinity).must.equal(1)
       })
 
       it("must return -1 if unbounded", function() {
         new Range(null, 10, "(]").compareBegin(11).must.equal(-1)
       })
 
-      it("must return -1 if unbounded with -Infinity", function() {
-        new Range(-Infinity, 10, "(]").compareBegin(0).must.equal(-1)
+      it("must return 1 if given endpoint equal", function() {
+        new Range(0, 10, "(]").compareBegin(0).must.equal(1)
       })
 
-      it("must return 1 if unbounded with Infinity", function() {
-        new Range(Infinity, Infinity, "(]").compareBegin(0).must.equal(1)
+      it("must return 1 if unbounded and equal", function() {
+        new Range(null, 10, "(]").compareBegin(null).must.equal(1)
+      })
+
+      it("must return 1 if given endpoint less than", function() {
+        new Range(0, 10, "(]").compareBegin(-1).must.equal(1)
+      })
+
+      it("must return 1 given null", function() {
+        new Range(0, 10, "(]").compareBegin(null).must.equal(1)
+      })
+    })
+  })
+
+  describe(".prototype.compareEnd", function() {
+    describe("with inclusive bound", function() {
+      it("must return 0 if given endpoint equal", function() {
+        new Range(0, 10, "(]").compareEnd(10).must.equal(0)
+      })
+
+      it("must return 0 if unbounded and equal", function() {
+        new Range(0, null, "(]").compareEnd(null).must.equal(0)
+      })
+
+      it("must return -1 if given endpoint greater than", function() {
+        new Range(0, 10, "(]").compareEnd(11).must.equal(-1)
+      })
+
+      it("must return -1 if given null", function() {
+        new Range(0, 10, "(]").compareEnd(null).must.equal(-1)
+      })
+
+      it("must return 1 if given endpoint less than", function() {
+        new Range(0, 10, "(]").compareEnd(9).must.equal(1)
+      })
+
+      it("must return 1 if unbounded", function() {
+        new Range(0, null, "(]").compareEnd(-1).must.equal(1)
+      })
+    })
+
+    describe("with exclusive bound", function() {
+      it("must return 1 if given endpoint equal", function() {
+        new Range(0, 10, "[)").compareEnd(0).must.equal(1)
+      })
+
+      it("must return -1 if given endpoint greater than", function() {
+        new Range(0, 10, "[)").compareEnd(11).must.equal(-1)
+      })
+
+      it("must return -1 if unbounded and equal", function() {
+        new Range(10, null, "[)").compareEnd(null).must.equal(-1)
+      })
+
+      it("must return -1 if given null", function() {
+        new Range(0, 10, "(]").compareEnd(null).must.equal(-1)
+      })
+
+      it("must return 1 if given endpoint less than", function() {
+        new Range(0, 10, "[)").compareEnd(-1).must.equal(1)
+      })
+
+      it("must return 1 if unbounded", function() {
+        new Range(0, null, "[)").compareEnd(-1).must.equal(1)
       })
     })
   })

@@ -62,17 +62,45 @@ function Range(begin, end, bounds) {
  * Returns `-1` if this range begins before the given value, `0` if they're
  * equal and `1` if this range begins after the given value.
  *
+ * `null` is considered to signify negative infinity for non-numeric range
+ * endpoints.
+ *
  * @example
  * new Range(0, 10).compareBegin(5) // => -1
  * new Range(0, 10).compareBegin(0) // => 0
  * new Range(5, 10).compareBegin(0) // => 1
+ * new Range(5, 10).compareBegin(null) // => 1
  *
  * @method compareBegin
  * @param {Object} begin
  */
 Range.prototype.compareBegin = function(begin) {
-  if (this.bounds[0] == "[") return compare(this.begin, begin)
-  else return compare(this.begin, begin) || 1
+  var a = this.begin === null ? -Infinity : this.begin
+  var b = begin === null ? -Infinity : begin
+  return compare(a, b) || (this.bounds[0] == "[" ? 0 : 1)
+}
+
+/**
+ * Compares this range's end with the given value.  
+ * Returns `-1` if this range ends before the given value, `0` if they're
+ * equal and `1` if this range ends after the given value.
+ *
+ * `null` is considered to signify positive infinity for non-numeric range
+ * endpoints.
+ *
+ * @example
+ * new Range(0, 10).compareEnd(5) // => -1
+ * new Range(0, 10).compareEnd(10) // => 0
+ * new Range(0, 5).compareEnd(10) // => 1
+ * new Range(0, 5).compareEnd(null) // => -1
+ *
+ * @method compareEnd
+ * @param {Object} end
+ */
+Range.prototype.compareEnd = function(end) {
+  var a = this.end === null ? Infinity : this.end
+  var b = end === null ? Infinity : end
+  return compare(a, b) || (this.bounds[1] == "]" ? 0 : -1)
 }
 
 /**

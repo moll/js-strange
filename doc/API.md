@@ -5,6 +5,7 @@ stRange.js API Documentation
 - [bounds](#range.bounds)
 - [end](#range.end)
 - [.prototype.compareBegin](#Range.prototype.compareBegin)(begin)
+- [.prototype.compareEnd](#Range.prototype.compareEnd)(end)
 - [.prototype.contains](#Range.prototype.contains)(value)
 - [.prototype.intersects](#Range.prototype.intersects)(other)
 - [.prototype.isBounded](#Range.prototype.isBounded)()
@@ -69,11 +70,32 @@ Compares this range's beginning with the given value.
 Returns `-1` if this range begins before the given value, `0` if they're
 equal and `1` if this range begins after the given value.
 
+`null` is considered to signify negative infinity for non-numeric range
+endpoints.
+
 **Examples**:
 ```javascript
 new Range(0, 10).compareBegin(5) // => -1
 new Range(0, 10).compareBegin(0) // => 0
 new Range(5, 10).compareBegin(0) // => 1
+new Range(5, 10).compareBegin(null) // => 1
+```
+
+<a name="Range.prototype.compareEnd" />
+### Range.prototype.compareEnd(end)
+Compares this range's end with the given value.  
+Returns `-1` if this range ends before the given value, `0` if they're
+equal and `1` if this range ends after the given value.
+
+`null` is considered to signify positive infinity for non-numeric range
+endpoints.
+
+**Examples**:
+```javascript
+new Range(0, 10).compareEnd(5) // => -1
+new Range(0, 10).compareEnd(10) // => 0
+new Range(0, 5).compareEnd(10) // => 1
+new Range(0, 5).compareEnd(null) // => -1
 ```
 
 <a name="Range.prototype.contains" />

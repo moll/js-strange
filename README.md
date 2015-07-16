@@ -90,6 +90,7 @@ For extended documentation on all functions, please see the
 - [bounds](https://github.com/moll/js-strange/blob/master/doc/API.md#range.bounds)
 - [end](https://github.com/moll/js-strange/blob/master/doc/API.md#range.end)
 - [.prototype.compareBegin](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.compareBegin)(begin)
+- [.prototype.compareEnd](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.compareEnd)(end)
 - [.prototype.contains](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.contains)(value)
 - [.prototype.intersects](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.intersects)(other)
 - [.prototype.isBounded](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isBounded)()
