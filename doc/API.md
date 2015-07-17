@@ -20,6 +20,10 @@ stRange.js API Documentation
 - [.parse](#Range.parse)(range, [parseEndpoint])
 - [.union](#Range.union)(union, a, b)
 
+### [RangeTree](#RangeTree)
+- [.prototype.search](#RangeTree.prototype.search)(value)
+- [.from](#RangeTree.from)(ranges)
+
 
 <a name="Range" />
 Range(begin, end, [bounds])
@@ -30,6 +34,11 @@ an all inclusive range.
 
 You can use any value for endpoints. `Null` is considered infinity for
 values that don't have a special infinity type like `Number` has `Infinity`.
+
+**Import**:
+```javascript
+var Range = require("strange")
+```
 
 **Examples**:
 ```javascript
@@ -267,4 +276,53 @@ Range.union(new Range(0, 10), new Range(5, 15)) // => new Range(0, 15)
 var a = new Range(-5, 0, "()")
 var b = new Range(5, 10)
 Range.union(a, b) // => new Range(-5, 10, "(]")
+```
+
+
+<a name="RangeTree" />
+RangeTree(ranges, left, right)
+------------------------------
+Create an interval tree node.
+
+For creating a binary search tree out of an array of ranges, you might want
+to use [`RangeTree.from`](#RangeTree.from).
+
+**Import**:
+```javascript
+var RangeTree = require("strange/tree")
+```
+
+**Examples**:
+```javascript
+var left = new RangeTree([new Range(-5, 0)])
+var right = new RangeTree([new Range(5, 10)])
+var root = new RangeTree([new Range(0, 5), new Range(0, 10)], left, right]
+root.search(7) // => [new Range(0, 10), new Range(5, 10)]
+```
+
+<a name="RangeTree.prototype.search" />
+### RangeTree.prototype.search(value)
+Search for ranges that include the given value.  
+Returns an array. Empty if no range contained the given value.
+
+**Examples**:
+```javascript
+RangeTree.from([new Range(40, 50)]).search(42) // => [new Range(40, 50)]
+RangeTree.from([new Range(40, 50)]).search(13) // => []
+```
+
+<a name="RangeTree.from" />
+### RangeTree.from(ranges)
+Create an interval tree (implemented as an augmented binary search tree)
+from an array of ranges.  
+Returns a [`RangeTree`](#RangeTree) you can search on.
+
+If you need to relate the found ranges to other data, add some properties
+directly to every range _or_ use JavaScript's `Map` or `WeakMap` to relate
+extra data to those range instances.
+
+**Examples**:
+```javascript
+var ranges = [new Range(0, 10), new Range(20, 30), new Range(40, 50)]
+RangeTree.from(ranges).search(42) // => [new Range(40, 50)]
 ```

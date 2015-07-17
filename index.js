@@ -8,6 +8,11 @@ module.exports = Range
  * You can use any value for endpoints. `Null` is considered infinity for
  * values that don't have a special infinity type like `Number` has `Infinity`.
  *
+ * **Import**:
+ * ```javascript
+ * var Range = require("strange")
+ * ```
+ *
  * @example
  * new Range(10, 20) // => {begin: 10, end: 20, bounds: "[]"}
  * new Range(new Date(2000, 5, 18), new Date(2000, 5, 22)

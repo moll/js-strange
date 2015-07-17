@@ -3,9 +3,9 @@ stRange.js
 [![NPM version][npm-badge]](http://badge.fury.io/js/strange)
 
 stRange.js is a **range object** for JavaScript. Use it to have a single value
-type with two endpoints and their boundaries. Stringifies itself in the style of
-`[begin,end)` and allows you to parse a string back. Also useful with
-PostgreSQL.
+type with two endpoints and their boundaries. Also implements an interval tree
+for quick lookups. Stringifies itself in the style of `[begin,end)` and allows
+you to parse a string back. Also useful with PostgreSQL.
 
 [npm-badge]: https://badge.fury.io/js/strange.png
 
@@ -104,6 +104,10 @@ For extended documentation on all functions, please see the
 - [.compareEndToEnd](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareEndToEnd)(a, b)
 - [.parse](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.parse)(range, [parseEndpoint])
 - [.union](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.union)(union, a, b)
+
+### [RangeTree](https://github.com/moll/js-strange/blob/master/doc/API.md#RangeTree)
+- [.prototype.search](https://github.com/moll/js-strange/blob/master/doc/API.md#RangeTree.prototype.search)(value)
+- [.from](https://github.com/moll/js-strange/blob/master/doc/API.md#RangeTree.from)(ranges)
 
 
 License

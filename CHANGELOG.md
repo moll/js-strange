@@ -16,11 +16,15 @@
 - Fixes [`Range.prototype.intersects`][] to handle exclusive unbounded ranges
   properly.
 
+- Adds [`RangeTree`] for creating an interval tree (augmented binary search
+  tree) for searching ranges that intersect with a given value.
+
 [`Range.compareBeginToBegin`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareBeginToBegin
 [`Range.compareEndToEnd`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareEndToEnd
 [`Range.union`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.union
 [`Range.prototype.compareBegin`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.compareBegin
 [`Range.prototype.compareEnd`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.compareEnd
+[`RangeTree`]: https://github.com/moll/js-strange/blob/master/doc/API.md#RangeTree
 
 ## 1.2.0 (Jul 4, 2015)
 - Adds [`Range.prototype.isBounded`][].
