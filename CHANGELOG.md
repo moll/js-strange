@@ -1,4 +1,4 @@
-## Unreleased
+## 1.3.0 (Jul 17, 2015)
 - Adds [`Range.compareBeginToBegin`][].
 - Adds [`Range.compareEndToEnd`][].
 - Adds [`Range.union`][].
