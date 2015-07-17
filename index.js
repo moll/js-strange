@@ -14,9 +14,9 @@ module.exports = Range
  *
  * @class Range
  * @constructor
- * @param begin
- * @param end
- * @param [bounds]
+ * @param {Object} begin
+ * @param {Object} end
+ * @param {String} [bounds="[]"]
  */
 function Range(begin, end, bounds) {
   if (!(this instanceof Range)) return new Range(begin, end, bounds)
@@ -24,14 +24,14 @@ function Range(begin, end, bounds) {
   /**
    * Range's beginning, or left endpoint.
    *
-   * @property begin
+   * @property {Object} begin
    */
   this.begin = begin
 
   /**
    * Range's end, or right endpoint.
    *
-   * @property end
+   * @property {Object} end
    */
   this.end = end
 
@@ -186,7 +186,7 @@ Range.prototype.isInfinite = Range.prototype.isUnbounded
  * new Range(0, 10, "[)").contains(10) // => false
  *
  * @method contains
- * @param value
+ * @param {Object} value
  */
 Range.prototype.contains = function(value) {
   var a = this.begin
@@ -213,7 +213,7 @@ Range.prototype.contains = function(value) {
  * new Range(0, 10).intersects(new Range(20, 30)) // => false
  *
  * @method intersects
- * @param other
+ * @param {Object} other
  */
 Range.prototype.intersects = function(other) {
   if (this.isEmpty()) return false
