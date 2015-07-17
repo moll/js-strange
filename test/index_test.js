@@ -605,4 +605,84 @@ describe("Range", function() {
       Range.parse("(,)", Number).must.eql(new Range(-Infinity, Infinity, "()"))
     })
   })
+
+  describe(".union", function() {
+    function union(a, b) {
+      var result = Range.union(a, b)
+      Range.union(b, a).must.eql(result)
+      return result
+    }
+
+    it("must return a union given one empty range", function() {
+      var a = new Range(0, 5)
+      var b = new Range(10, 10, "[)")
+      union(a, b).must.eql(new Range(0, 5))
+    })
+
+    it("must return a union given two empty ranges", function() {
+      var a = new Range(5, 5, "[)")
+      var b = new Range(10, 10, "[)")
+      union(a, b).must.eql(new Range)
+    })
+
+    it("must return a union given same range twice", function() {
+      var a = new Range(0, 10, "[)")
+      union(a, a).must.eql(a)
+    })
+
+    describe("with inclusive bounds", function() {
+      it("must return a union given two intersecting ranges", function() {
+        var a = new Range(0, 11, "[]")
+        var b = new Range(9, 20, "[]")
+        union(a, b).must.eql(new Range(0, 20, "[]"))
+      })
+
+      it("must return a union given two consecutive ranges", function() {
+        var a = new Range(0, 10, "[]")
+        var b = new Range(10, 20, "[]")
+        union(a, b).must.eql(new Range(0, 20, "[]"))
+      })
+
+      it("must return a union given two non-consecutive ranges", function() {
+        var a = new Range(0, 5, "[]")
+        var b = new Range(15, 20, "[]")
+        union(a, b).must.eql(new Range(0, 20, "[]"))
+      })
+    })
+
+    describe("with exclusive bounds", function() {
+      it("must return a union given two intersecting ranges", function() {
+        var a = new Range(0, 11, "()")
+        var b = new Range(9, 20, "()")
+        union(a, b).must.eql(new Range(0, 20, "()"))
+      })
+
+      it("must return a union given two close, but non-consecutive ranges",
+        function() {
+        var a = new Range(0, 10, "()")
+        var b = new Range(10, 20, "()")
+        union(a, b).must.eql(new Range(0, 20, "()"))
+      })
+
+      it("must return a union given two non-consecutive ranges", function() {
+        var a = new Range(0, 5, "()")
+        var b = new Range(15, 20, "()")
+        union(a, b).must.eql(new Range(0, 20, "()"))
+      })
+    })
+
+    describe("with different bounds", function() {
+      it("must return a union given two consecutive ranges", function() {
+        var a = new Range(0, 10, "(]")
+        var b = new Range(10, 20, "[)")
+        union(a, b).must.eql(new Range(0, 20, "()"))
+      })
+
+      it("must return a union given two non-consecutive ranges", function() {
+        var a = new Range(0, 5, "[)")
+        var b = new Range(15, 20, "[)")
+        union(a, b).must.eql(new Range(0, 20, "[)"))
+      })
+    })
+  })
 })

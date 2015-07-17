@@ -18,6 +18,7 @@ stRange.js API Documentation
 - [.compareBeginToBegin](#Range.compareBeginToBegin)(a, b)
 - [.compareEndToEnd](#Range.compareEndToEnd)(a, b)
 - [.parse](#Range.parse)(range, [parseEndpoint])
+- [.union](#Range.union)(union, a, b)
 
 
 <a name="Range" />
@@ -251,4 +252,19 @@ Range.parse("[a,z)") // => new Range("a", "z", "[)")
 Range.parse("[42,69]", Number) // => new Range(42, 69)
 Range.parse("[15,]", Number) // => new Range(15, Infinity)
 Range.parse("(,3.14]", Number) // => new Range(-Infinity, 3.14, "(]")
+```
+
+<a name="Range.union" />
+### Range.union(union, a, b)
+Merges two ranges and returns a range that encompasses both of them.  
+The ranges don't have to be intersecting.
+
+**Examples**:
+```javascript
+Range.union(new Range(0, 5), new Range(5, 10)) // => new Range(0, 10)
+Range.union(new Range(0, 10), new Range(5, 15)) // => new Range(0, 15)
+
+var a = new Range(-5, 0, "()")
+var b = new Range(5, 10)
+Range.union(a, b) // => new Range(-5, 10, "(]")
 ```

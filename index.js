@@ -328,14 +328,43 @@ Range.parse = function(range, parse) {
   return new Range(begin, end, range[0] + range[range.length - 1])
 }
 
+/**
+ * Merges two ranges and returns a range that encompasses both of them.  
+ * The ranges don't have to be intersecting.
+ *
+ * @example
+ * Range.union(new Range(0, 5), new Range(5, 10)) // => new Range(0, 10)
+ * Range.union(new Range(0, 10), new Range(5, 15)) // => new Range(0, 15)
+ *
+ * var a = new Range(-5, 0, "()")
+ * var b = new Range(5, 10)
+ * Range.union(a, b) // => new Range(-5, 10, "(]")
+ *
+ * @static
+ * @method union
+ * @param {String} union
+ * @param {Range} a
+ * @param {Range} b
+ */
+Range.union = function(a, b) {
+  var aIsEmpty = a.isEmpty()
+  var bIsEmpty = b.isEmpty()
+  if (aIsEmpty && bIsEmpty) return new Range
+  else if (aIsEmpty) return b
+  else if (bIsEmpty) return a
+
+  var begin = Range.compareBeginToBegin(a, b) <= 0 ? a : b
+  var end = Range.compareEndToEnd(a, b) <= 0 ? b : a
+  return new Range(begin.begin, end.end, begin.bounds[0] + end.bounds[1])
+}
+
+// The less-than operator ensures coercion with valueOf.
+function compare(a, b) { return a < b ? -1 : b < a ? 1 : 0 }
 function stringify(value) { return isInfinity(value) ? "" : String(value) }
 
 function isInfinity(value) {
   return value === null || value === Infinity || value === -Infinity
 }
-
-// The less-than operator ensures coercion with valueOf.
-function compare(a, b) { return a < b ? -1 : b < a ? 1 : 0 }
 
 function isBeginBeforeEnd(a, b) {
   var aBegin = a.begin === null ? -Infinity : a.begin

@@ -103,6 +103,7 @@ For extended documentation on all functions, please see the
 - [.compareBeginToBegin](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareBeginToBegin)(a, b)
 - [.compareEndToEnd](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareEndToEnd)(a, b)
 - [.parse](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.parse)(range, [parseEndpoint])
+- [.union](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.union)(union, a, b)
 
 
 License

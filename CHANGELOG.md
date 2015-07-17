@@ -1,6 +1,7 @@
 ## Unreleased
 - Adds [`Range.compareBeginToBegin`][].
 - Adds [`Range.compareEndToEnd`][].
+- Adds [`Range.union`][].
 - Adds [`Range.prototype.compareBegin`][].
 - Adds [`Range.prototype.compareEnd`][].
 
@@ -17,6 +18,7 @@
 
 [`Range.compareBeginToBegin`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareBeginToBegin
 [`Range.compareEndToEnd`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareEndToEnd
+[`Range.union`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.union
 [`Range.prototype.compareBegin`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.compareBegin
 [`Range.prototype.compareEnd`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.compareEnd
 
