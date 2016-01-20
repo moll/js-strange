@@ -60,6 +60,10 @@ function Range(begin, end, bounds) {
    * @property {String} bounds
    */
    this.bounds = bounds === undefined ? "[]" : bounds
+
+   if (["[]", "[)", "(]", "()"].indexOf(this.bounds) === -1) {
+    throw new Error("invalid bounds: " + this.bounds);
+  }
 }
 
 /**
