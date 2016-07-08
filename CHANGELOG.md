@@ -1,4 +1,4 @@
-## Unreleased
+## 1.4.0 (Jul 8, 2016)
 - Makes `Range.prototype` a valid empty `Range`.  
   Allows you to use it as an empty range:
 
