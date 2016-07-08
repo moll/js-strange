@@ -62,6 +62,10 @@ function Range(begin, end, bounds) {
    this.bounds = bounds === undefined ? "[]" : bounds
 }
 
+Range.prototype.begin = undefined
+Range.prototype.end = undefined
+Range.prototype.bounds = "[]"
+
 /**
  * Compares this range's beginning with the given value.  
  * Returns `-1` if this range begins before the given value, `0` if they're

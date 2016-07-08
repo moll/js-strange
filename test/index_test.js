@@ -41,6 +41,13 @@ describe("Range", function() {
     })
   })
 
+  describe(".prototype", function() {
+    it("must be a valid range", function() {
+      Range.prototype.isEmpty().must.be.true()
+      Range.prototype.contains(new Range(0, 1)).must.be.false()
+    })
+  })
+
   describe(".prototype.isEmpty", function() {
     it("must return true given a range with undefined endpoints", function() {
       new Range(undefined, undefined).isEmpty().must.be.true()

@@ -1,3 +1,13 @@
+## Unreleased
+- Makes `Range.prototype` a valid empty `Range`.  
+  Allows you to use it as an empty range:
+
+  ```javascript
+  var EMPTY_RANGE = Range.prototype
+  EMPTY_RANGE.isEmpty() // => true
+  EMPTY_RANGE.contains(new Range(0, 1)) // => false
+  ```
+
 ## 1.3.0 (Jul 17, 2015)
 - Adds [`Range.compareBeginToBegin`][].
 - Adds [`Range.compareEndToEnd`][].
