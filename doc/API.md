@@ -15,6 +15,7 @@ stRange.js API Documentation
 - [.prototype.isUnbounded](#Range.prototype.isUnbounded)()
 - [.prototype.toJSON](#Range.prototype.toJSON)()
 - [.prototype.toString](#Range.prototype.toString)()
+- [.prototype.valueOf](#Range.prototype.valueOf)()
 - [.compareBeginToBegin](#Range.compareBeginToBegin)(a, b)
 - [.compareEndToEnd](#Range.compareEndToEnd)(a, b)
 - [.parse](#Range.parse)(range, [parseEndpoint])
@@ -216,6 +217,18 @@ therefore use stRange.js to parse and stringify ranges for your database.
 ```javascript
 new Range(1, 5).toString() // => "[1,5]"
 new Range(1, 10, "[)").toString() // => "[1,10)"
+```
+
+<a name="Range.prototype.valueOf" />
+### Range.prototype.valueOf()
+Returns an array of the endpoints and bounds.
+
+Useful with [Egal.js](https://github.com/moll/js-egal) or other libraries
+that compare value objects by their `valueOf` output.
+
+**Examples**:
+```javascript
+new Range(1, 10, "[)").valueOf() // => [1, 10, "[)"]
 ```
 
 <a name="Range.compareBeginToBegin" />

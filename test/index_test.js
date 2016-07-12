@@ -428,6 +428,12 @@ describe("Range", function() {
     })
   })
 
+  describe(".prototype.valueOf", function() {
+    it("must return an array", function() {
+      new Range(42, 69, "()").valueOf().must.eql([42, 69, "()"])
+    })
+  })
+
   describe(".prototype.toString", function() {
     it("must stringify range with given bounds", function() {
       new Range(42, 69, "()").toString().must.equal("(42,69)")

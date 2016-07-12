@@ -100,6 +100,7 @@ For extended documentation on all functions, please see the
 - [.prototype.isUnbounded](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.isUnbounded)()
 - [.prototype.toJSON](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.toJSON)()
 - [.prototype.toString](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.toString)()
+- [.prototype.valueOf](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.valueOf)()
 - [.compareBeginToBegin](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareBeginToBegin)(a, b)
 - [.compareEndToEnd](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareEndToEnd)(a, b)
 - [.parse](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.parse)(range, [parseEndpoint])

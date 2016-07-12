@@ -231,6 +231,21 @@ Range.prototype.intersects = function(other) {
 }
 
 /**
+ * Returns an array of the endpoints and bounds.
+ *
+ * Useful with [Egal.js](https://github.com/moll/js-egal) or other libraries
+ * that compare value objects by their `valueOf` output.
+ *
+ * @example
+ * new Range(1, 10, "[)").valueOf() // => [1, 10, "[)"]
+ *
+ * @method valueOf
+ */
+Range.prototype.valueOf = function() {
+  return [this.begin, this.end, this.bounds]
+}
+
+/**
  * Stringifies a range in `[a,b]` format.
  *
  * This happens to match the string format used by [PostgreSQL's range type

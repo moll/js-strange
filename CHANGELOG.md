@@ -1,3 +1,10 @@
+## Unreleased
+- Adds [`Range.prototype.valueOf`][] to get a more primitive representation of a range.  
+  Useful with [Egal.js][egal] or other libraries that compare value objects by their `valueOf` output.
+
+[`Range.prototype.valueOf`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.valueOf
+[egal]: https://github.com/moll/js-egal
+
 ## 1.4.0 (Jul 8, 2016)
 - Makes `Range.prototype` a valid empty `Range`.  
   Allows you to use it as an empty range:
