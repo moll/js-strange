@@ -1,4 +1,4 @@
-## Unreleased
+## 1.5.0 (Jul 12, 2016)
 - Adds [`Range.prototype.valueOf`][] to get a more primitive representation of a range.  
   Useful with [Egal.js][egal] or other libraries that compare value objects by their `valueOf` output.
 
