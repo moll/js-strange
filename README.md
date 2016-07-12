@@ -1,6 +1,7 @@
 stRange.js
 ==========
 [![NPM version][npm-badge]](http://badge.fury.io/js/strange)
+[![Build status][travis-badge]](https://travis-ci.org/moll/js-strange)
 
 stRange.js is a **range object** for JavaScript. Use it to have a single value
 type with two endpoints and their boundaries. Also implements an interval tree
@@ -8,6 +9,7 @@ for quick lookups. Stringifies itself in the style of `[begin,end)` and allows
 you to parse a string back. Also useful with PostgreSQL.
 
 [npm-badge]: https://badge.fury.io/js/strange.png
+[travis-badge]: https://travis-ci.org/moll/js-strange.png?branch=master
 
 
 Installing
