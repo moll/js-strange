@@ -286,7 +286,7 @@ Range.prototype.inspect = Range.prototype.toString
  * @example
  * Range.compareBeginToBegin(new Range(0, 10), new Range(5, 15)) // => -1
  * Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15)) // => 0
- * Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15, "()")) // => -1
+ * Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15, "()")) // => 1
  *
  * @static
  * @method compareBeginToBegin
