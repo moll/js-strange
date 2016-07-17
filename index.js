@@ -8,6 +8,10 @@ module.exports = Range
  * You can use any value for endpoints. `Null` is considered infinity for
  * values that don't have a special infinity type like `Number` has `Infinity`.
  *
+ * An empty range is one where either of the endpoints is `undefined` (like `new
+ * Range`) or a range with two equivalent, but exculsive endpoints
+ * (`new Range(5, 5, "[)")`).
+ *
  * **Import**:
  * ```javascript
  * var Range = require("strange")
@@ -114,9 +118,9 @@ Range.prototype.compareEnd = function(end) {
 
 /**
  * Check whether the range is empty.  
- * An empty range is one with `undefined` endpoints (like `new Range`) or
- * a range with two equivalent, but exculsive endpoints (`new Range(5, 5,
- * "[)")`).
+ * An empty range is one where either of the endpoints is `undefined` (like `new
+ * Range`) or a range with two equivalent, but exculsive endpoints
+ * (`new Range(5, 5, "[)")`).
  *
  * Equivalence is checked by using the `<` operators, so value objects will be
  * coerced into something comparable by JavaScript. That usually means calling
