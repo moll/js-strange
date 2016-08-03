@@ -1,6 +1,6 @@
 var Range = require("./")
 var concat = Array.prototype.concat.bind(Array.prototype)
-var EMPTY = Array.prototype
+var EMPTY_ARR = Array.prototype
 module.exports = RangeTree
 
 /**
@@ -27,6 +27,7 @@ module.exports = RangeTree
  * @param {RangeTree} right
  */
 function RangeTree(keys, left, right) {
+  // Store the longest range first.
   if (Array.isArray(keys)) this.keys = keys.slice().sort(reverseCompareEndToEnd)
   else this.keys = [keys]
 
@@ -78,38 +79,61 @@ RangeTree.new = function(ranges) {
 }
 
 /**
- * Search for ranges that include the given value.  
- * Returns an array. Empty if no range contained the given value.
+ * Search for ranges that include the given value or, given a range, intersect
+ * with it.  
+ * Returns an array of matches or an empty one if no range contained or
+ * intersected with the given value.
  *
  * @example
- * RangeTree.from([new Range(40, 50)]).search(42) // => [new Range(40, 50)]
- * RangeTree.from([new Range(40, 50)]).search(13) // => []
+ * var tree = RangeTree.from([new Range(40, 50)])
+ * tree.search(42) // => [new Range(40, 50)]
+ * tree.search(13) // => []
+ * tree.search(new Range(30, 42)) // => [new Range(40, 50)]
  *
  * @method search
- * @param {Object} value
+ * @param {Object} valueOrRange
  */
 RangeTree.prototype.search = function(value) {
-  if (!this.range.contains(value)) return EMPTY
+  if (value instanceof Range) return this.searchByRange(value)
+  else return this.searchByValue(value)
+}
+
+RangeTree.prototype.searchByValue = function(value) {
+  if (!this.range.contains(value)) return EMPTY_ARR
 
   var ownPosition = this.keys[0].compareBegin(value)
 
   return concat(
-    this.left ? this.left.search(value) : EMPTY,
-    ownPosition <= 0 ? this.searchOwn(value) : EMPTY,
-    this.right && ownPosition < 0 ? this.right.search(value) : EMPTY
+    this.left ? this.left.searchByValue(value) : EMPTY_ARR,
+    ownPosition <= 0 ? this.searchOwnByValue(value) : EMPTY_ARR,
+    this.right && ownPosition < 0 ? this.right.searchByValue(value) : EMPTY_ARR
   )
 }
 
-RangeTree.prototype.searchOwn = function(value) {
-  // Sort ranges in ascending order for beauty. O:)
+RangeTree.prototype.searchByRange = function(range) {
+  if (!this.range.intersects(range)) return EMPTY_ARR
+
+  var ownPosition = Range.compareBeginToEnd(this.keys[0], range)
+
+  return concat(
+    this.left ? this.left.searchByRange(range) : EMPTY_ARR,
+    ownPosition <= 0 ? this.searchOwnByRange(range) : EMPTY_ARR,
+    this.right && ownPosition < 0 ? this.right.searchByRange(range) : EMPTY_ARR
+  )
+}
+
+// Sort ranges in ascending order for beauty. O:)
+RangeTree.prototype.searchOwnByValue = function(value) {
   return take(this.keys, function(r) { return r.contains(value) }).reverse()
+}
+
+RangeTree.prototype.searchOwnByRange = function(range) {
+  return take(this.keys, function(r) { return r.intersects(range) }).reverse()
 }
 
 function reverseCompareEndToEnd(a, b) {
   return Range.compareEndToEnd(a, b) * -1
 }
-
-function arrayify(obj) { return [obj] }
 
 function dedupe(ranges, range) {
   var last = ranges[ranges.length - 1]
@@ -127,3 +151,5 @@ function take(arr, fn) {
   for (var i = 0; i < arr.length && fn(arr[i], i); ++i) values.push(arr[i])
   return values
 }
+
+function arrayify(obj) { return [obj] }

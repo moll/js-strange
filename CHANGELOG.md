@@ -1,5 +1,6 @@
 ## Unreleased
 - Adds [`Range.compareBeginToEnd`][]
+- Adds support for calling `RangeTree.prototype.search` with range to find ranges that intersect.
 
 [`Range.compareBeginToEnd`]: https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareBeginToEnd
 

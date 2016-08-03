@@ -110,7 +110,7 @@ For extended documentation on all functions, please see the
 - [.union](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.union)(union, a, b)
 
 ### [RangeTree](https://github.com/moll/js-strange/blob/master/doc/API.md#RangeTree)
-- [.prototype.search](https://github.com/moll/js-strange/blob/master/doc/API.md#RangeTree.prototype.search)(value)
+- [.prototype.search](https://github.com/moll/js-strange/blob/master/doc/API.md#RangeTree.prototype.search)(valueOrRange)
 - [.from](https://github.com/moll/js-strange/blob/master/doc/API.md#RangeTree.from)(ranges)
 
 

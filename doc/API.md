@@ -23,7 +23,7 @@ stRange.js API Documentation
 - [.union](#Range.union)(union, a, b)
 
 ### [RangeTree](#RangeTree)
-- [.prototype.search](#RangeTree.prototype.search)(value)
+- [.prototype.search](#RangeTree.prototype.search)(valueOrRange)
 - [.from](#RangeTree.from)(ranges)
 
 
@@ -332,14 +332,18 @@ root.search(7) // => [new Range(0, 10), new Range(5, 10)]
 ```
 
 <a name="RangeTree.prototype.search" />
-### RangeTree.prototype.search(value)
-Search for ranges that include the given value.  
-Returns an array. Empty if no range contained the given value.
+### RangeTree.prototype.search(valueOrRange)
+Search for ranges that include the given value or, given a range, intersect
+with it.  
+Returns an array of matches or an empty one if no range contained or
+intersected with the given value.
 
 **Examples**:
 ```javascript
-RangeTree.from([new Range(40, 50)]).search(42) // => [new Range(40, 50)]
-RangeTree.from([new Range(40, 50)]).search(13) // => []
+var tree = RangeTree.from([new Range(40, 50)])
+tree.search(42) // => [new Range(40, 50)]
+tree.search(13) // => []
+tree.search(new Range(30, 42)) // => [new Range(40, 50)]
 ```
 
 <a name="RangeTree.from" />
