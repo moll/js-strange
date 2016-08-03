@@ -17,6 +17,7 @@ stRange.js API Documentation
 - [.prototype.toString](#Range.prototype.toString)()
 - [.prototype.valueOf](#Range.prototype.valueOf)()
 - [.compareBeginToBegin](#Range.compareBeginToBegin)(a, b)
+- [.compareBeginToEnd](#Range.compareBeginToEnd)(a, b)
 - [.compareEndToEnd](#Range.compareEndToEnd)(a, b)
 - [.parse](#Range.parse)(range, [parseEndpoint])
 - [.union](#Range.union)(union, a, b)
@@ -246,6 +247,19 @@ if `a` begins after `b`.
 Range.compareBeginToBegin(new Range(0, 10), new Range(5, 15)) // => -1
 Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15)) // => 0
 Range.compareBeginToBegin(new Range(0, 10), new Range(0, 15, "()")) // => 1
+```
+
+<a name="Range.compareBeginToEnd" />
+### Range.compareBeginToEnd(a, b)
+Compares the first range's beginning to the second's end.  
+Returns `<0` if `a` begins before `b` ends, `0` if one starts where the other
+ends and `>1` if `a` begins after `b` ends.
+
+**Examples**:
+```javascript
+Range.compareBeginToEnd(new Range(0, 10), new Range(0, 5)) // => -1
+Range.compareBeginToEnd(new Range(0, 10), new Range(-10, 0)) // => 0
+Range.compareBeginToEnd(new Range(0, 10), new Range(-10, -5)) // => 1
 ```
 
 <a name="Range.compareEndToEnd" />

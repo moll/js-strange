@@ -231,7 +231,11 @@ Range.prototype.contains = function(value) {
 Range.prototype.intersects = function(other) {
   if (this.isEmpty()) return false
   if (other.isEmpty()) return false
-  return isBeginBeforeEnd(this, other) && isBeginBeforeEnd(other, this)
+
+  return (
+    Range.compareBeginToEnd(this, other) <= 0 &&
+    Range.compareBeginToEnd(other, this) <= 0
+  )
 }
 
 /**
@@ -302,6 +306,28 @@ Range.compareBeginToBegin = function(a, b) {
   var bBegin = b.begin === null ? -Infinity : b.begin
   if (a.bounds[0] === b.bounds[0]) return compare(aBegin, bBegin)
   else return compare(aBegin, bBegin) || (b.bounds[0] === "(" ? -1 : 1)
+}
+
+/**
+ * Compares the first range's beginning to the second's end.  
+ * Returns `<0` if `a` begins before `b` ends, `0` if one starts where the other
+ * ends and `>1` if `a` begins after `b` ends.
+ *
+ * @example
+ * Range.compareBeginToEnd(new Range(0, 10), new Range(0, 5)) // => -1
+ * Range.compareBeginToEnd(new Range(0, 10), new Range(-10, 0)) // => 0
+ * Range.compareBeginToEnd(new Range(0, 10), new Range(-10, -5)) // => 1
+ *
+ * @static
+ * @method compareBeginToEnd
+ * @param {Object} a
+ * @param {Object} b
+ */
+Range.compareBeginToEnd = function(a, b) {
+  var aBegin = a.begin === null ? -Infinity : a.begin
+  var bEnd = b.end === null ? Infinity : b.end
+  if (a.bounds[0] === "[" && b.bounds[1] === "]") return compare(aBegin, bEnd)
+  else return compare(aBegin, bEnd) || 1
 }
 
 /**
@@ -386,17 +412,10 @@ Range.union = function(a, b) {
   return new Range(begin.begin, end.end, begin.bounds[0] + end.bounds[1])
 }
 
-// The less-than operator ensures coercion with valueOf.
-function compare(a, b) { return a < b ? -1 : b < a ? 1 : 0 }
-function stringify(value) { return isInfinity(value) ? "" : String(value) }
-
 function isInfinity(value) {
   return value === null || value === Infinity || value === -Infinity
 }
 
-function isBeginBeforeEnd(a, b) {
-  var aBegin = a.begin === null ? -Infinity : a.begin
-  var bEnd = b.end === null ? Infinity : b.end
-  if (a.bounds[0] === "[" && b.bounds[1] === "]") return aBegin <= bEnd
-  return aBegin < bEnd
-}
+// The less-than operator ensures coercion with valueOf.
+function compare(a, b) { return a < b ? -1 : b < a ? 1 : 0 }
+function stringify(value) { return isInfinity(value) ? "" : String(value) }

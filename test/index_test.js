@@ -493,7 +493,7 @@ describe("Range", function() {
         compare(a, b).must.equal(0)
       })
 
-      it("must return -1 if one less", function() {
+      it("must return -1 if less", function() {
         var a = new Range(-1, 10, bounds)
         var b = new Range(0, 10, bounds)
         compare(a, b).must.equal(-1)
@@ -517,18 +517,101 @@ describe("Range", function() {
 
     describe("with different bounds", function() {
       it("must return -1 if equal", function() {
-        compare(new Range(0, 10, "[)"), new Range(0, 10, "()")).must.equal(-1)
+        compare(new Range(0, 10, "[]"), new Range(0, 10, "()")).must.equal(-1)
       })
 
-      it("must return -1 if one less", function() {
-        compare(new Range(-1, 10, "[)"), new Range(0, 10, "()")).must.equal(-1)
-        compare(new Range(-1, 10, "()"), new Range(0, 10, "[)")).must.equal(-1)
+      it("must return -1 if less", function() {
+        compare(new Range(-1, 10, "[]"), new Range(0, 10, "()")).must.equal(-1)
+        compare(new Range(-1, 10, "()"), new Range(0, 10, "[]")).must.equal(-1)
       })
 
       it("must return -1 if equal and unbounded", function() {
         var a = new Range(null, 10, "[]")
         var b = new Range(null, 10, "(]")
         compare(a, b).must.equal(-1)
+      })
+    })
+  })
+
+  describe(".compareBeginToEnd", function() {
+    var compare = Range.compareBeginToEnd
+
+    describe("with inclusive bounds", function() {
+      it("must return 0 if equal", function() {
+        var a = new Range(0, 10, "[]")
+        var b = new Range(-5, 0, "[]")
+        compare(a, b).must.equal(0)
+      })
+
+      it("must return -1 if less", function() {
+        var a = new Range(-1, 10, "[]")
+        var b = new Range(-5, 0, "[]")
+        compare(a, b).must.equal(-1)
+      })
+
+      it("must return -1 if unbounded", function() {
+        var a = new Range(null, 10, "[]")
+        var b = new Range(20, null, "[]")
+        compare(a, b).must.equal(-1)
+      })
+
+      it("must return -1 if begin unbounded", function() {
+        var a = new Range(null, 10, "[]")
+        var b = new Range(0, 5, "[]")
+        compare(a, b).must.equal(-1)
+      })
+
+      it("must return -1 if end unbounded", function() {
+        var a = new Range(0, 10, "[]")
+        var b = new Range(0, null, "[]")
+        compare(a, b).must.equal(-1)
+      })
+    })
+
+    describe("with exclusive bounds", function() {
+      it("must return 1 if equal", function() {
+        var a = new Range(0, 10, "()")
+        var b = new Range(-5, 0, "()")
+        compare(a, b).must.equal(1)
+      })
+
+      it("must return -1 if less", function() {
+        var a = new Range(-1, 10, "()")
+        var b = new Range(-5, 0, "()")
+        compare(a, b).must.equal(-1)
+      })
+
+      it("must return -1 if unbounded", function() {
+        var a = new Range(null, 10, "()")
+        var b = new Range(20, null, "()")
+        compare(a, b).must.equal(-1)
+      })
+
+      it("must return -1 if begin unbounded", function() {
+        var a = new Range(null, 10, "()")
+        var b = new Range(0, 5, "()")
+        compare(a, b).must.equal(-1)
+      })
+
+      it("must return -1 if end unbounded", function() {
+        var a = new Range(0, 10, "()")
+        var b = new Range(0, null, "()")
+        compare(a, b).must.equal(-1)
+      })
+    })
+
+    describe("with different bounds", function() {
+      it("must return 1 if begin inclusive and end exclusive", function() {
+        compare(new Range(0, 10, "[]"), new Range(-10, 0, "()")).must.equal(1)
+      })
+
+      it("must return 1 if begin exclusive and end inclusive", function() {
+        compare(new Range(0, 10, "()"), new Range(-10, 0, "[]")).must.equal(1)
+      })
+
+      it("must return -1 if less", function() {
+        compare(new Range(-1, 10, "[]"), new Range(-10, 0, "()")).must.equal(-1)
+        compare(new Range(-1, 10, "()"), new Range(-10, 0, "[]")).must.equal(-1)
       })
     })
   })
@@ -574,7 +657,7 @@ describe("Range", function() {
         compare(new Range(0, 10, "()"), new Range(0, 10, "(]")).must.equal(-1)
       })
 
-      it("must return -1 if one less", function() {
+      it("must return -1 if less", function() {
         compare(new Range(0, 9, "(]"), new Range(0, 10, "()")).must.equal(-1)
         compare(new Range(0, 9, "()"), new Range(0, 10, "(]")).must.equal(-1)
       })

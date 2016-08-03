@@ -104,6 +104,7 @@ For extended documentation on all functions, please see the
 - [.prototype.toString](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.toString)()
 - [.prototype.valueOf](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.prototype.valueOf)()
 - [.compareBeginToBegin](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareBeginToBegin)(a, b)
+- [.compareBeginToEnd](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareBeginToEnd)(a, b)
 - [.compareEndToEnd](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.compareEndToEnd)(a, b)
 - [.parse](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.parse)(range, [parseEndpoint])
 - [.union](https://github.com/moll/js-strange/blob/master/doc/API.md#Range.union)(union, a, b)
