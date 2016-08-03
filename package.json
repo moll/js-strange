@@ -1,11 +1,13 @@
 {
 	"name": "strange",
 	"version": "1.5.0",
-	"description": "Range aka interval object. Supports exclusive and infinite ranges.",
+	"description": "Range aka interval object. Supports exclusive and infinite ranges. Comes with an interval tree (augmented binary search tree).",
 	"keywords": [
 		"range",
 		"ranges",
 		"interval",
+		"interval-tree",
+		"bst",
 		"integer",
 		"integers",
 		"sort",
