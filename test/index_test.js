@@ -26,6 +26,12 @@ describe("Range", function() {
       range.must.have.property("end", undefined)
       range.bounds.must.equal("[]")
     })
+
+    it("must throw error if bounds are invalid", function() {
+      (function() {
+        new Range(42, 69, ")(");
+      }).must.throw(/invalid bounds/);
+    });
   })
 
   describe("when called as a function", function() {
