@@ -1,4 +1,4 @@
-## Unreleased
+## 1.6.0 (Aug 5, 2016)
 - Adds [`Range.compareBeginToEnd`][]
 - Adds support for calling `RangeTree.prototype.search` with range to find ranges that intersect.
 
