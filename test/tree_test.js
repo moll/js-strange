@@ -260,6 +260,20 @@ describe("RangeTree", function() {
           new Range(0, 15)
         ])
       })
+
+      it("must not return ranges if exclusive", function() {
+        var tree = RangeTree.from([
+          new Range(0, 10, "[)"),
+          new Range(20, 30, "(]")
+        ])
+
+        tree.search(new Range(10, 20)).must.eql([])
+      })
+
+      it("must not return ranges if exclusive and side by side", function() {
+        var tree = RangeTree.from([new Range(0, 10, "[)")])
+        tree.search(new Range(10, 15, "[)")).must.eql([])
+      })
     })
   })
 })
