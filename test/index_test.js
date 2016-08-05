@@ -13,18 +13,27 @@ describe("Range", function() {
       range.bounds.must.equal("[]")
     })
 
-    it("must set bounds", function() {
-      var range = new Range(42, 69, "()")
-      range.begin.must.equal(42)
-      range.end.must.equal(69)
-      range.bounds.must.equal("()")
-    })
 
-    it("must set bounds to undefined if not given", function() {
+    it("must set begin and end to undefined if not given", function() {
       var range = new Range
       range.must.have.property("begin", undefined)
       range.must.have.property("end", undefined)
       range.bounds.must.equal("[]")
+    })
+
+    ;["[]", "()", "[)", "(]"].forEach(function(bounds) {
+      it("must set bounds given " + bounds, function() {
+        var range = new Range(42, 69, bounds)
+        range.begin.must.equal(42)
+        range.end.must.equal(69)
+        range.bounds.must.equal(bounds)
+      })
+    })
+
+    it("must throw RangeError given invalid bounds", function() {
+      var err
+      try { new Range(42, 69, ")(") } catch (ex) { err = ex }
+      err.must.be.an.error(RangeError, /bounds/i)
     })
   })
 

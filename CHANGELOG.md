@@ -1,3 +1,7 @@
+## Unreleased
+- Throws `RangeError` if the given bounds are not valid (not of the following: `[]`, `()`, `[)`, `(]`).  
+  Thanks, [Nikhil Benesch](https://github.com/benesch), for the hint!
+
 ## 1.6.0 (Aug 5, 2016)
 - Adds [`Range.compareBeginToEnd`][]
 - Adds support for calling `RangeTree.prototype.search` with range to find ranges that intersect.

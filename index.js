@@ -1,3 +1,4 @@
+var INVALID_BOUNDS_ERR = "Invalid range bounds: "
 module.exports = Range
 
 /**
@@ -63,7 +64,8 @@ function Range(begin, end, bounds) {
    *
    * @property {String} bounds
    */
-   this.bounds = bounds === undefined ? "[]" : bounds
+   this.bounds = bounds = bounds === undefined ? "[]" : bounds
+   if (!isValidBounds(bounds)) throw new RangeError(INVALID_BOUNDS_ERR + bounds)
 }
 
 Range.prototype.begin = undefined
@@ -414,6 +416,16 @@ Range.union = function(a, b) {
 
 function isInfinity(value) {
   return value === null || value === Infinity || value === -Infinity
+}
+
+function isValidBounds(bounds) {
+   switch (bounds) {
+     case "()":
+     case "[]":
+     case "[)":
+     case "(]": return true
+     default: return false
+   }
 }
 
 // The less-than operator ensures coercion with valueOf.
