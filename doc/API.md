@@ -49,7 +49,7 @@ var Range = require("strange")
 **Examples**:
 ```javascript
 new Range(10, 20) // => {begin: 10, end: 20, bounds: "[]"}
-new Range(new Date(2000, 5, 18), new Date(2000, 5, 22)
+new Range(new Date(2000, 5, 18), new Date(2000, 5, 22))
 ```
 
 <a name="range.begin" />
