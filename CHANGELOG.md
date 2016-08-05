@@ -1,4 +1,4 @@
-## Unreleased
+## 1.7.0 (Aug 5, 2016)
 - Throws `RangeError` if the given bounds are not valid (not of the following: `[]`, `()`, `[)`, `(]`).  
   Thanks, [Nikhil Benesch](https://github.com/benesch), for the hint!
 
