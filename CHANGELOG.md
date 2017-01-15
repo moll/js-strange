@@ -1,4 +1,4 @@
-## Unreleased
+## 1.7.1 (Jan 15, 2017)
 - Fixes searching `RangeTree` with an empty range in it. Empty ranges are now ignored.
 
 ## 1.7.0 (Aug 5, 2016)
