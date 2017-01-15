@@ -122,6 +122,13 @@ describe("RangeTree", function() {
           new Range(0, 15)
         ])
       })
+
+      // This was a bug noticed on Jan 15, 2017 where an empty range caused
+      // none to be matched.
+      it("must return range if one empty", function() {
+        var tree = RangeTree.from([new Range, new Range(0, 10)])
+        tree.search(5).must.eql([new Range(0, 10)])
+      })
     })
 
     describe("given range", function() {

@@ -57,7 +57,7 @@ function RangeTree(keys, left, right) {
  * @param {Range[]} ranges
  */
 RangeTree.from = function(ranges) {
-  ranges = ranges.slice()
+  ranges = ranges.filter(isNotEmpty)
   ranges = ranges.sort(Range.compareBeginToBegin)
   ranges = ranges.map(arrayify)
   ranges = ranges.reduce(dedupe, [])
@@ -153,3 +153,4 @@ function take(arr, fn) {
 }
 
 function arrayify(obj) { return [obj] }
+function isNotEmpty(range) { return !range.isEmpty() }
