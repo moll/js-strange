@@ -34,8 +34,9 @@ function RangeTree(keys, left, right) {
   this.left = left || null
   this.right = right || null
 
-  var a = this.left ? this.left.range : this.keys[0]
-  var b = this.right ? this.right.range : this.keys[0]
+  // Remember, the topmost key has the longest range.
+  var a = this.left? this.left.range : this.keys[0]
+  var b = this.right? Range.union(this.keys[0], this.right.range) : this.keys[0]
   this.range = Range.union(a, b)
 }
 

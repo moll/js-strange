@@ -268,6 +268,37 @@ describe("RangeTree", function() {
         ])
       })
 
+      // This was a bug #2 (https://github.com/moll/js-strange/issues/2) where
+      // a node's total range end was not set properly because it considered
+      // the range(s) to the right of it to always end farther.
+      it("must return range farther than later ranges", function() {
+        var tree = RangeTree.from([
+          new Range(-5, 5),
+          new Range(0, 15),
+          new Range(5, 10)
+        ])
+
+        tree.search(new Range(12, 13)).must.eql([new Range(0, 15)])
+      })
+
+      // The original bug report for the bug above had long timestamps that
+      // I normalized below. Keeping them here as more insurance.
+      it("must return range farther than later ranges in original bug report",
+        function() {
+        var tree = RangeTree.from([
+          new Range(10, 20, "[)"),
+          new Range(20, 30, "[)"),
+          new Range(30, 40, "[)"),
+          new Range(40, 50, "[)"),
+          new Range(50, 60, "[)"),
+          new Range(80, 100, "[)"),
+          new Range(85, 86, "[)"),
+        ])
+
+        var matches = tree.search(new Range(90, 95, "[)"))
+        matches.must.eql([new Range(80, 100, "[)")])
+      })
+
       it("must not return ranges if exclusive", function() {
         var tree = RangeTree.from([
           new Range(0, 10, "[)"),
