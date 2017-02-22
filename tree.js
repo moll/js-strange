@@ -1,4 +1,8 @@
 var Range = require("./")
+var union = Range.union
+var compareBeginToBegin = Range.compareBeginToBegin
+var compareBeginToEnd = Range.compareBeginToEnd
+var compareEndToEnd = Range.compareEndToEnd
 var concat = Array.prototype.concat.bind(Array.prototype)
 var EMPTY_ARR = Array.prototype
 module.exports = RangeTree
@@ -35,9 +39,9 @@ function RangeTree(keys, left, right) {
   this.right = right || null
 
   // Remember, the topmost key has the longest range.
-  var a = this.left? this.left.range : this.keys[0]
-  var b = this.right? Range.union(this.keys[0], this.right.range) : this.keys[0]
-  this.range = Range.union(a, b)
+  var a = this.left ? this.left.range : this.keys[0]
+  var b = this.right ? union(this.keys[0], this.right.range) : this.keys[0]
+  this.range = union(a, b)
 }
 
 /**
@@ -59,7 +63,7 @@ function RangeTree(keys, left, right) {
  */
 RangeTree.from = function(ranges) {
   ranges = ranges.filter(isNotEmpty)
-  ranges = ranges.sort(Range.compareBeginToBegin)
+  ranges = ranges.sort(compareBeginToBegin)
   ranges = ranges.map(arrayify)
   ranges = ranges.reduce(dedupe, [])
   return this.new(ranges)
@@ -114,7 +118,7 @@ RangeTree.prototype.searchByValue = function(value) {
 RangeTree.prototype.searchByRange = function(range) {
   if (!this.range.intersects(range)) return EMPTY_ARR
 
-  var ownPosition = Range.compareBeginToEnd(this.keys[0], range)
+  var ownPosition = compareBeginToEnd(this.keys[0], range)
 
   return concat(
     this.left ? this.left.searchByRange(range) : EMPTY_ARR,
@@ -132,14 +136,10 @@ RangeTree.prototype.searchOwnByRange = function(range) {
   return take(this.keys, function(r) { return r.intersects(range) }).reverse()
 }
 
-function reverseCompareEndToEnd(a, b) {
-  return Range.compareEndToEnd(a, b) * -1
-}
-
 function dedupe(ranges, range) {
   var last = ranges[ranges.length - 1]
 
-  if (last != null && Range.compareBeginToBegin(last[0], range[0]) === 0)
+  if (last != null && compareBeginToBegin(last[0], range[0]) === 0)
     last.push(range[0])
   else
     ranges.push(range)
@@ -155,3 +155,4 @@ function take(arr, fn) {
 
 function arrayify(obj) { return [obj] }
 function isNotEmpty(range) { return !range.isEmpty() }
+function reverseCompareEndToEnd(a, b) { return compareEndToEnd(a, b) * -1 }
