@@ -1,4 +1,4 @@
-## Unreleased
+## 1.7.2 (Feb 22, 2017)
 - Fixes `RangeTree` given a range that ended farther than ranges beginning after it.  
   This occurring was dependent on how the binary tree laid itself out.  
   Thanks, [Ross Allen](https://github.com/ssorallen), for reporting this!

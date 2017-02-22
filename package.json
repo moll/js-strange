@@ -1,6 +1,6 @@
 {
 	"name": "strange",
-	"version": "1.7.1",
+	"version": "1.7.2",
 	"description": "Range aka interval object. Supports exclusive and infinite ranges. Comes with an interval tree (augmented binary search tree).",
 	"keywords": [
 		"range",
